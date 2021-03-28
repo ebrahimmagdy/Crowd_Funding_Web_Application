@@ -5,8 +5,9 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Crowd Fund</title>
 
-  <title>Mentor Bootstrap Template - Index</title>
+  <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABeUlEQVRIS9WV7TUEQRBF70ZABogAGZCBDBABIkAEZIAIEAEiQAZkQASc61Tt6ZntNTM79of603u2q9+revUxE5ZskyXjM4TgDDiKgK7jPIjzEjivBduXQPDTjmwl0K9hfQk+gBVgG/D3XSuDZ+AN2PgLghdgNYAk2wIkeAfWFyVIiQTcBSTRBH8IwlESCSboZkikFGZh5J5PwM6YIvtWoMcgKTN4DXCzm7G+Rc6HJYn//Qquw1CCMhN/K0s18oyoJND5qtYJ4WxrWsiUJzHsHGfE07ub0qcksI/XOobJa7vIWmh7EVS2bT6XyJlpSPQVtzXZBHAd7BcDVU73fdybpQNpbWzh3gQZWWZphD8AIZtk7icD+Iw7fTsJMquacgK57Iz6GLgIcGs5rVMpR02ieQRKILhAnjaHdhiZTAPqIuiqebkqTqIOjTdjCJTiNibc1sxvw1yCXMldUbfv7SDbtWrtQbMT+syCYK5n/Wc+MiXTIqtiUIb/n+AbeqdRGXjmw98AAAAASUVORK5CYII=" type="image/png">
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -16,8 +17,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Vendor CSS Files -->
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static 'vendor/icofont/icofont.min.css' %}" rel="stylesheet">
@@ -70,7 +72,8 @@
 {#              </li>#}
               <li><a href="#">Shelters</a></li>
               <li><a href="#">Dept Funding</a></li>
-              <li><a href="#">Animals</a></li>
+              <li><a href="#">Education</a></li>
+                <li><a href="#">Animals</a></li>
             </ul>
 {#          </li>#}
           <li><a href="contact.html">Contact</a></li>
@@ -78,7 +81,14 @@
         </ul>
       </nav><!-- .nav-menu -->
 
-      <a href="courses.html" class="get-started-btn">Login or Sign up</a>
+      <a href="courses.html" class="get-started-btn"><i class='bx bx-lock-alt' style="font-size: 17px"></i> Login</a>
+
+      <form class="example" action="" style="margin-left:3%; max-width:300px">
+          <input type="text" placeholder="Search for projects..." name="search2">
+          <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+
+{#############################}
 {#     <div class="search-container">#}
 {#            <form action="/action_page.php">#}
 {#              <input type="text" placeholder="Projects.." name="search">#}
@@ -90,14 +100,7 @@
 {#            </form>#}
 {#        </div>#}
 
-        <div class="wrap">
-           <div class="search">
-              <input type="text" class="searchTerm" placeholder="Project">
-              <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
-             </button>
-           </div>
-        </div>
+
 </div>
 
 {#    </div>#}
@@ -827,9 +830,9 @@
   <!-- ======= Footer ======= -->
   <footer id="footer">
 
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
+{#    <div class="footer-top">#}
+{#      <div class="container">#}
+{#        <div class="row">#}
 
 {#          <div class="col-lg-3 col-md-6 footer-contact">#}
 {#            <h3>Mentor</h3>#}
@@ -876,7 +879,7 @@
 {#      </div>#}
 {#    </div>#}
 
-    <div class="container d-md-flex py-4">
+{#    <div class="container d-md-flex py-4">#}
 
 {#      <div class="mr-md-auto text-center text-md-left">#}
 {#        <div class="copyright">#}
@@ -897,8 +900,8 @@
 {#        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>#}
 {#        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>#}
 {#      </div>#}
-    </div>
-  </footer><!-- End Footer -->
+{#    </div>#}
+  </footer> <!-- End Footer -->
 
   <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
   <div id="preloader"></div>
