@@ -6,8 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Crowd Fund</title>
-
-  <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABeUlEQVRIS9WV7TUEQRBF70ZABogAGZCBDBABIkAEZIAIEAEiQAZkQASc61Tt6ZntNTM79of603u2q9+revUxE5ZskyXjM4TgDDiKgK7jPIjzEjivBduXQPDTjmwl0K9hfQk+gBVgG/D3XSuDZ+AN2PgLghdgNYAk2wIkeAfWFyVIiQTcBSTRBH8IwlESCSboZkikFGZh5J5PwM6YIvtWoMcgKTN4DXCzm7G+Rc6HJYn//Qquw1CCMhN/K0s18oyoJND5qtYJ4WxrWsiUJzHsHGfE07ub0qcksI/XOobJa7vIWmh7EVS2bT6XyJlpSPQVtzXZBHAd7BcDVU73fdybpQNpbWzh3gQZWWZphD8AIZtk7icD+Iw7fTsJMquacgK57Iz6GLgIcGs5rVMpR02ieQRKILhAnjaHdhiZTAPqIuiqebkqTqIOjTdjCJTiNibc1sxvw1yCXMldUbfv7SDbtWrtQbMT+syCYK5n/Wc+MiXTIqtiUIb/n+AbeqdRGXjmw98AAAAASUVORK5CYII=" type="image/png">
+  <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABeUlEQVRIS9WV7TUEQRBF70ZABogAGZCBDBABIkAEZIAIEAEiQAZkQASc61Tt6ZntNTM79of603u2q9+revUxE5ZskyXjM4TgDDiKgK7jPIjzEjivBduXQPDTjmwl0K9hfQk+gBVgG/D3XSuDZ+AN2PgLghdgNYAk2wIkeAfWFyVIiQTcBSTRBH8IwlESCSboZkikFGZh5J5PwM6YIvtWoMcgKTN4DXCzm7G+Rc6HJYn//Qquw1CCMhN/K0s18oyoJND5qtYJ4WxrWsiUJzHsHGfE07ub0qcksI/XOobJa7vIWmh7EVS2bT6XyJlpSPQVtzXZBHAd7BcDVU73fdybpQNpbWzh3gQZWWZphD8AIZtk7icD+Iw7fTsJMquacgK57Iz6GLgIcGs5rVMpR02ieQRKILhAnjaHdhiZTAPqIuiqebkqTqIOjTdjCJTiNibc1sxvw1yCXMldUbfv7SDbtWrtQbMT+syCYK5n/Wc+MiXTIqtiUIb/n+AbeqdRGXjmw98AAAAASUVORK5CYII="type="image/png">
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -55,21 +54,9 @@
           <li class="active"><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="courses.html">Projects</a></li>
-{#          <li><a href="trainers.html">Top Donators</a></li>#}
-{#          <li><a href="events.html">Events</a></li>#}
-{#          <li><a href="pricing.html">Pricing</a></li>#}
           <li class="drop-down"><a href="">Categories</a>
             <ul>
               <li><a href="#">Food Bank</a></li>
-{#              <li class="drop-down"><a href="#">Deep Drop Down</a>#}
-{#                <ul>#}
-{#                  <li><a href="#">Deep Drop Down 1</a></li>#}
-{#                  <li><a href="#">Deep Drop Down 2</a></li>#}
-{#                  <li><a href="#">Deep Drop Down 3</a></li>#}
-{#                  <li><a href="#">Deep Drop Down 4</a></li>#}
-{#                  <li><a href="#">Deep Drop Down 5</a></li>#}
-{#                </ul>#}
-{#              </li>#}
               <li><a href="#">Shelters</a></li>
               <li><a href="#">Dept Funding</a></li>
               <li><a href="#">Education</a></li>
@@ -81,25 +68,14 @@
         </ul>
       </nav><!-- .nav-menu -->
 
-      <a href="courses.html" class="get-started-btn"><i class='bx bx-lock-alt' style="font-size: 17px"></i> Login</a>
+      <a href="{% url "login" %}" class="get-started-btn"><i class='bx bx-lock-alt' style="font-size: 17px"></i> Login</a>
+
+        <!-- ======= Search Section ======= -->
 
       <form class="example" action="" style="margin-left:3%; max-width:300px">
           <input type="text" placeholder="Search for projects..." name="search2">
           <button type="submit"><i class="fa fa-search"></i></button>
       </form>
-
-{#############################}
-{#     <div class="search-container">#}
-{#            <form action="/action_page.php">#}
-{#              <input type="text" placeholder="Projects.." name="search">#}
-{#              <button type="submit"><i class="fa fa-search"></i></button>#}
-{#            </form>#}
-{#         <div class="col-lg-4 col-md-6 footer-newsletter">#}
-{#            <form action="" method="post">#}
-{#              <input type="email" name="email"><input type="submit" value="Search">#}
-{#            </form>#}
-{#        </div>#}
-
 
 </div>
 

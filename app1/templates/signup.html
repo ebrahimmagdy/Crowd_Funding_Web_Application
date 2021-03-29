@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABeUlEQVRIS9WV7TUEQRBF70ZABogAGZCBDBABIkAEZIAIEAEiQAZkQASc61Tt6ZntNTM79of603u2q9+revUxE5ZskyXjM4TgDDiKgK7jPIjzEjivBduXQPDTjmwl0K9hfQk+gBVgG/D3XSuDZ+AN2PgLghdgNYAk2wIkeAfWFyVIiQTcBSTRBH8IwlESCSboZkikFGZh5J5PwM6YIvtWoMcgKTN4DXCzm7G+Rc6HJYn//Qquw1CCMhN/K0s18oyoJND5qtYJ4WxrWsiUJzHsHGfE07ub0qcksI/XOobJa7vIWmh7EVS2bT6XyJlpSPQVtzXZBHAd7BcDVU73fdybpQNpbWzh3gQZWWZphD8AIZtk7icD+Iw7fTsJMquacgK57Iz6GLgIcGs5rVMpR02ieQRKILhAnjaHdhiZTAPqIuiqebkqTqIOjTdjCJTiNibc1sxvw1yCXMldUbfv7SDbtWrtQbMT+syCYK5n/Wc+MiXTIqtiUIb/n+AbeqdRGXjmw98AAAAASUVORK5CYII="type="image/png">
+  <title>Sign up</title>
+  <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="logo"><img class="logo" src="{% static "img/logo.png" %}" alt=""></div>
+    <h2>Sign up to continue</h2>
+    <p></p>
+    <form>
+      <div class="inputBox">
+        <input type="text" name="fname" required onkeyup="this.setAttribute('value', this.value);" value="">
+        <label>First Name</label>
+      </div>
+      <div class="inputBox">
+        <input type="text" name="lname" required onkeyup="this.setAttribute('value', this.value);" value="">
+        <label>Last Name</label>
+      </div>
+      <div class="inputBox">
+        <input type="email" name="email" required onkeyup="this.setAttribute('value', this.value);" value="">
+        <label>Email</label>
+      </div>
+
+      <div class="inputBox">
+        <input type="text" name="text" required onkeyup="this.setAttribute('value', this.value);" value="">
+        <label>Phone Number</label>
+      </div>
+      <div class="inputBox">
+        <input type="text" name="text" required onkeyup="this.setAttribute('value', this.value);" value="">
+        <label>Passward</label>
+      </div>
+      <div class="inputBox">
+        <input type="text" name="text" required onkeyup="this.setAttribute('value', this.value);" value="">
+        <label>Confirm Passward</label>
+      </div>
+
+
+      <input type="submit" name="sign-in" value="Sign up">
+     <div class="signup">Do you have an account? <a href="{% url 'login' %}" >Login</a></div>
+    </form>
+
+  </div>
+
+</body>
+
+</html>
