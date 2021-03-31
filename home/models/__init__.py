@@ -1,1 +1,1 @@
-from . import user, comment, project
+from . import user, comment, project, category
