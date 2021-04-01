@@ -38,7 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+    'crispy_forms',
+    'file_picker',
+    'file_picker.uploads', # file and image Django app
+    'file_picker.wymeditor', # optional WYMeditor plugin
+    'sorl.thumbnail',  # required
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +61,7 @@ ROOT_URLCONF = 'Crowd_Funding.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['home.templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
