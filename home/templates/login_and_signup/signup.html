@@ -14,7 +14,9 @@
     <div class="logo"><img class="logo" src="{% static "img/logo.png" %}" alt=""></div>
     <h2>Sign up to continue</h2>
     <p></p>
-    <form>
+    
+    <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data"> 
+      {% csrf_token %}
       <div class="inputBox">
         <input type="text" name="fname" required onkeyup="this.setAttribute('value', this.value);" value="">
         <label>First Name</label>
@@ -24,28 +26,38 @@
         <label>Last Name</label>
       </div>
       <div class="inputBox">
-        <input type="email" name="email" required onkeyup="this.setAttribute('value', this.value);" value="">
+        <input type="email" name="email" required onkeyup="this.setAttribute('value', this.value);" value=""  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="not valid email">
         <label>Email</label>
       </div>
 
       <div class="inputBox">
-        <input type="text" name="text" required onkeyup="this.setAttribute('value', this.value);" value="">
+        <input type="text" name="phone" required onkeyup="this.setAttribute('value', this.value);" value="" pattern="^01[1250][0-9]{8}$" title="not valid phone number">
         <label>Phone Number</label>
       </div>
       <div class="inputBox">
-        <input type="text" name="text" required onkeyup="this.setAttribute('value', this.value);" value="">
+        <input type="password" id="password" name="password" required onkeyup="this.setAttribute('value', this.value);" value="" pattern=".{8,}" title="must contain 8 or more characters">
         <label>Passward</label>
       </div>
       <div class="inputBox">
-        <input type="text" name="text" required onkeyup="this.setAttribute('value', this.value);" value="">
+        <input type="password" id="confirm_password" name="confirm_password" required onkeyup="this.setAttribute('value', this.value);" value="" oninput=check(this)>
         <label>Confirm Passward</label>
+        <script language='javascript' type='text/javascript'>
+          function check(input) {
+              if (document.getElementById('confirm_password').value != document.getElementById('password').value) {
+                  input.setCustomValidity('Password Must be Matching.');
+              } else {
+                  // input is valid -- reset the error message
+                  input.setCustomValidity('');
+              }
+          }
+      </script>
       </div>
-
-
-      <input type="submit" name="sign-in" value="Sign up">
+     <label> Upload Image</label> <input type="file" name="photo" accept="image/*" >
+      
+      <input type="submit" name="sign_in" value="Sign up">
      <div class="signup">Do you have an account? <a href="{% url 'login' %}" >Login</a></div>
     </form>
 
   </div>
-
+  
 {% endblock %}
