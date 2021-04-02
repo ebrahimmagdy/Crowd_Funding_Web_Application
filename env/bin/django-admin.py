@@ -1,4 +1,4 @@
-#!/home/abdo/django2/env/bin/python3
+#!/home/abdo/Desktop/django/Crowd_Funding_Web_Application/env/bin/python3
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

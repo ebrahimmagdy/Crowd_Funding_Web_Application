@@ -39,10 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'crispy_forms',
-    'file_picker',
-    'file_picker.uploads', # file and image Django app
-    'file_picker.wymeditor', # optional WYMeditor plugin
-    'sorl.thumbnail',  # required
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
