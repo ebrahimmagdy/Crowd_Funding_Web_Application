@@ -15,6 +15,8 @@ class Project(models.Model):
     reports = models.ManyToManyField(Users, through='Report_Project', related_name='user_report')
     rates = models.ManyToManyField(Users, through='Rate_Project', related_name='user_rate')
 
+
+
 class Project_Pictures(models.Model):
     id = models.BigIntegerField(primary_key=True)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
