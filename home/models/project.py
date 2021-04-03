@@ -1,6 +1,8 @@
 from django.db import models
 from .user import Users
 from .category import Category
+from taggit.managers import TaggableManager
+
 
 class Project(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -14,16 +16,17 @@ class Project(models.Model):
     donations = models.ManyToManyField(Users, through='Donation', related_name='user_donation')
     reports = models.ManyToManyField(Users, through='Report_Project', related_name='user_report')
     rates = models.ManyToManyField(Users, through='Rate_Project', related_name='user_rate')
+    tags = TaggableManager()
 
 class Project_Pictures(models.Model):
     # id = models.BigAutoField(primary_key=True)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
     picture = models.ImageField(upload_to='projects', null=True, blank=True)
 
-class Project_Tags(models.Model):
-    id = models.BigIntegerField(primary_key=True)
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
-    tag = models.CharField(max_length=100)
+# class Project_Tags(models.Model):
+#     id = models.BigIntegerField(primary_key=True)
+#     project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
+#     tag = models.CharField(max_length=100)
 
 class Donation(models.Model):
     id = models.BigIntegerField(primary_key=True)
