@@ -9,55 +9,54 @@
 
 {% block content %}
     <div class="form-group container myform">
-        <label for="exampleInputEmail1">Project Title</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter the project title">
-        <small id="emailHelp" class="form-text text-muted">Enter a descriptive title for your project.</small>
+        <form action="/project" method="post">
+                {% csrf_token %}
+            <label>Project Title</label>
+            <input type="text" class="form-control"  placeholder="Enter the project title" name="title">
 
-        <label for="exampleInputEmail1">Project Details</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter the project details">
-        <small id="emailHelp" class="form-text text-muted">Enter a descriptive title for your project.</small>
+            <label>Project Details</label>
+            <input type="text" class="form-control" placeholder="Enter the project details" name="details">
 
-        <label for="exampleInputEmail1">Project Target</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter the project target">
-        <small id="emailHelp" class="form-text text-muted">Enter a descriptive title for your project.</small>
+            <label>Project Target</label>
+            <input type="text" class="form-control" placeholder="Enter the project target" name="total_target">
 
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-          </div>
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-          </div>
-        </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              </div>
+            </div>
 
-        <label for="start">Start date:</label>
-        <input type="date" id="start" name="trip-start"
-               value="2020-01-01"
-               min="2018-01-01" max="2018-12-31">
+            <label>Start date:</label>
+            <input type="date" name="trip-start"
+                   value="2020-01-01">
 
-        <label for="start">End date:</label>
-        <input type="date" id="start" name="trip-start"
-               value="2020-07-22"
-               min="2018-01-01" max="2018-12-31">
+            <label>End date:</label>
+            <input type="date" name="trip-start"
+                   value="2020-07-22">
 
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Example textarea</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
 
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Choose Category
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Food Bank</a>
-            <a class="dropdown-item" href="#">Shelters</a>
-            <a class="dropdown-item" href="#">Dept Funding</a>
-            <a class="dropdown-item" href="#">Education</a>
-            <a class="dropdown-item" href="#">Animals</a>
-          </div>
-        </div>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Choose Category
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Food Bank</a>
+                <a class="dropdown-item" href="#">Shelters</a>
+                <a class="dropdown-item" href="#">Dept Funding</a>
+                <a class="dropdown-item" href="#">Education</a>
+                <a class="dropdown-item" href="#">Animals</a>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
 
 
     </div>
