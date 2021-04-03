@@ -9,7 +9,7 @@
     {% endblock %}
 
 {% block content %}
-    <form method="post" class="container myform">
+    <form method="post" class="container myform" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
             <div class="col-5">
@@ -21,7 +21,7 @@
 
         </div>
         <div class="row">
-            <div class="col-5" id="example-date-input" type="date">
+            <div class="col-5">
                 {{form.start_date|as_crispy_field}}
             </div>
             <div class="col-5">
@@ -31,7 +31,8 @@
         </div>
             {{form.details|as_crispy_field}}
             {{form.category|as_crispy_field}}
+        <label> Upload Image</label> <input type="file" name="photo" accept="image/*" >
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary d-block mt-4">Save</button>
     </form>
 {% endblock %}

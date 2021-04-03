@@ -1,9 +1,13 @@
 from django.urls import path
-from home import views
+from django.conf.urls import url
+from .views import home, user, project
 
 urlpatterns = [
-    path("home", views.home, name="home"),
-    path("login", views.login, name="login"),
-    path("signup", views.signup, name="signup"),
-    path("project", views.create_project, name="project"),
+    path("home", home.home, name="home"),
+    path("login", user.login, name="login"),
+    path("signup", user.signup, name="signup"),
+    path("project", project.create_project, name="project"),
+    path("activate", user.activate, name="activate"),
+    url(r'^project/(?P<project_id>\d+)/$', project.project_details, name="project_details")
 ]
+

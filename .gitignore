@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 env
 .idea
 db.sqlite3
 *.pyc
+||||||| 01ba6a16
+=======
+env/
+>>>>>>> 990bf1521f27d90eee51e3a2362fe31cf39c7eaa
