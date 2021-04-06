@@ -2,11 +2,16 @@
 <html lang="en">
 <head>
     {% load static %}
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/tagsinput.css" />
+
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 
 
     <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABeUlEQVRIS9WV7TUEQRBF70ZABogAGZCBDBABIkAEZIAIEAEiQAZkQASc61Tt6ZntNTM79of603u2q9+revUxE5ZskyXjM4TgDDiKgK7jPIjzEjivBduXQPDTjmwl0K9hfQk+gBVgG/D3XSuDZ+AN2PgLghdgNYAk2wIkeAfWFyVIiQTcBSTRBH8IwlESCSboZkikFGZh5J5PwM6YIvtWoMcgKTN4DXCzm7G+Rc6HJYn//Qquw1CCMhN/K0s18oyoJND5qtYJ4WxrWsiUJzHsHGfE07ub0qcksI/XOobJa7vIWmh7EVS2bT6XyJlpSPQVtzXZBHAd7BcDVU73fdybpQNpbWzh3gQZWWZphD8AIZtk7icD+Iw7fTsJMquacgK57Iz6GLgIcGs5rVMpR02ieQRKILhAnjaHdhiZTAPqIuiqebkqTqIOjTdjCJTiNibc1sxvw1yCXMldUbfv7SDbtWrtQbMT+syCYK5n/Wc+MiXTIqtiUIb/n+AbeqdRGXjmw98AAAAASUVORK5CYII="type="image/png">
@@ -164,6 +169,18 @@
 
   <!-- Template Main JS File -->
   <script src="{% static 'js/main.js' %}"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="/static/js/tagsinut.js"></script>
+  <script>
+    $('#formm').submit(function(e){
+        e.preventDefault();
+        });
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js"></script>
 
 
 </body>

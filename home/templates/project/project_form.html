@@ -1,0 +1,45 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+    {% block styles %}
+        <link rel="stylesheet" href="{% static 'css/project.css' %}">
+    {% endblock %}
+    {% block title %}
+      Create Project
+    {% endblock %}
+
+{% block content %}
+    <form method="post" class="container myform" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-5">
+                {{form.title|as_crispy_field}}
+            </div>
+            <div class="col-5">
+                {{form.total_target|as_crispy_field}}
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-5">
+                {{form.start_date|as_crispy_field}}
+            </div>
+            <div class="col-5">
+                {{form.end_date|as_crispy_field}}
+                <small class="form-text text-muted">please write the date in that form dd/mm/yyyy</small>
+            </div>
+        </div>
+            {{form.details|as_crispy_field}}
+            {{form.category|as_crispy_field}}
+            
+        <div class="form-group">
+            {{form.tags|as_crispy_field}}
+            <!-- <label>Tags</label>
+            <input type="text" data-role="tagsinput" class="form-control" name="tags"> -->
+        </div>
+
+        <label> Upload Image</label> <input type="file" name="photos" multiple accept="image/*" >
+
+        <button id="project-form" type="submit" class="btn btn-primary d-block mt-4">Save</button>
+    </form>
+{% endblock %}
