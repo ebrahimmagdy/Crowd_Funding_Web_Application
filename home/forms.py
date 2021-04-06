@@ -1,6 +1,9 @@
 from django import forms
-from .models.project import Project
+from .models.project import Project, Project_Pictures
 
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class ProjectForm(forms.ModelForm):
     class Meta:
@@ -15,3 +18,13 @@ class ProjectForm(forms.ModelForm):
             'category': 'Category',
             'tags': 'Tags',
         }
+        widgets = {
+            'start_date': DateInput(),
+            'end_date': DateInput(),
+        }
+
+class ImageForm(forms.ModelForm):
+    image = forms.ImageField(label='Image')    
+    class Meta:
+        model = Project_Pictures
+        fields = ('picture', )

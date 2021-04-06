@@ -2,7 +2,10 @@ from django.db import models
 from .user import Users
 from .category import Category
 from taggit.managers import TaggableManager
+from django import forms
 
+class DateForm(forms.Form):
+    date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'])
 
 class Project(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -21,7 +24,7 @@ class Project(models.Model):
 class Project_Pictures(models.Model):
     # id = models.BigAutoField(primary_key=True)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
-    picture = models.ImageField(upload_to='projects', null=True, blank=True)
+    picture = models.ImageField(upload_to='projects', null=True, blank=True, verbose_name='Image')
 
 # class Project_Tags(models.Model):
 #     id = models.BigIntegerField(primary_key=True)
