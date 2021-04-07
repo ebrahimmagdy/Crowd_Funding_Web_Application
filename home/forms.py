@@ -1,5 +1,6 @@
 from django import forms
 from .models.project import Project, Project_Pictures
+from .models.comment import Comment
 
 
 class DateInput(forms.DateInput):
@@ -28,3 +29,15 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Project_Pictures
         fields = ('picture', )
+
+class CommentForm(forms.ModelForm):
+    text = forms.CharField(label ="", widget = forms.Textarea(
+    attrs ={
+        'class':'form-control',
+        'placeholder':'Comment here !',
+        'rows':4,
+        'cols':70,
+    }))
+    class Meta:
+        model = Comment
+        fields =['text',]

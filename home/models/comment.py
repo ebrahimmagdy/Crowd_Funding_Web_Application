@@ -3,7 +3,7 @@ from .project import Project
 from .user import Users 
 
 class Comment(models.Model):
-    id = models.BigIntegerField(primary_key=True)
+    # id = models.BigIntegerField(primary_key=True)
     text = models.CharField(max_length=100)
     time = models.DateField(max_length=255)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)       
