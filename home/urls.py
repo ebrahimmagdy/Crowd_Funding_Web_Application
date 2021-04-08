@@ -8,7 +8,8 @@ urlpatterns = [
     path("signup", user.signup, name="signup"),
     path("project", project.create_project, name="project"),
     path("activate", user.activate, name="activate"),
-    url(r'^project/(?P<id>\d+)/comment$', project.project_comment, name="add_comment"),  
-    url(r'^project/(?P<id>\d+)/$', project.project_details, name="project_details")
+    url(r'^project/(?P<id>\d+)/$', project.project_details, name="project_details"),
+    # url(r'^project/(?P<id>\d+)/comment$', project.project_comment, name="add_comment"),
+  
 ]
 

@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from home.models.project import Project, Project_Pictures
 from home.models.comment import Comment
-from home.models.user import Users
+from django.contrib.auth.models import User 
 from home.forms import ProjectForm, ImageForm, CommentForm
 from taggit.models import Tag
 from django.template.defaultfilters import slugify
 from django.forms.formsets import formset_factory
 from django.forms import modelformset_factory
+from django.http import JsonResponse
 import datetime
-
+import sys
 
 def create_project(request):
     projects = Project.objects.order_by('id')
@@ -46,9 +47,14 @@ def project_details(request, id):
     return render(request, 'project/project_details.html', context)
 
 def project_comment(request, id):
-    user = User.objects.get(id = 1)
-    project = Project.objects.get(id = id)
-    comment = Comment.objects.create(project_id = project, user_id = user, text = request.POST.get('text'), time = datetime.datetime.now())
+    if request.user.is_authenticated:
+        user = request.user
+        project = Project.objects.get(id = id)
+        comment = Comment.objects.create(project_id = project, user_id = user, text = request.POST.get('text'), time = datetime.datetime.now())
+        #return JsonResponse({'message':'It worked fine'})
+        return HttpResponseRedirect(request.path_info)
+
+
 #   if request.method == 'POST':
 #     cf = CommentForm(request.POST or None)
 #     if cf.is_valid():
