@@ -42,3 +42,7 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields =['text',]
+
+# class comment_report_form(form.ModelForm):
+#     name = forms.CharField(required=True)
+#     age = forms.IntegerField(required=True)

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from home.models.project import Project, Project_Pictures
-from home.models.comment import Comment
+from home.models.comment import Comment, Report_Comment
 from django.contrib.auth.models import User 
 from home.forms import ProjectForm, ImageForm, CommentForm
 from taggit.models import Tag
@@ -55,8 +55,16 @@ def project_comment(request, id):
         comment = Comment.objects.create(project_id = project, user_id = user, text = request.POST.get('text'), time = datetime.datetime.now())
         #return JsonResponse({'message':'It worked fine'})
         #return HttpResponseRedirect(request.path_info)
-        return render(request, 'project/project_comment.html', {'comment': comment})
+        return render(request, 'project/project_comment.html', {'comment': comment, 'user': user})
 
+def comment_report(request, id):
+    if request.user.is_authenticated:
+        user = request.user
+        comment = Comment.objects.get(id = id)
+        report = Report_Comment.objects.create(comment_id = comment, user_id = user, message = request.POST.get('message'))
+        return JsonResponse({'message':'Your report submited successfully!'})
+        #return HttpResponseRedirect(request.path_info)
+        #return render(request, 'project/project_comment.html', {'comment': comment, 'user': user})
 
 #   if request.method == 'POST':
 #     cf = CommentForm(request.POST or None)
