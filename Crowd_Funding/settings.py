@@ -37,21 +37,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
-<<<<<<< HEAD
     'crispy_forms',
     'taggit',
-]
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-=======
     # 'home.apps.HomeConfig',
     'users',
     # 'users.apps.UsersConfig',
-    'crispy_forms',
     "verify_email",
 ]
 
->>>>>>> origin/development3
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
