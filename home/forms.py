@@ -33,6 +33,7 @@ class ImageForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     text = forms.CharField(label ="", widget = forms.Textarea(
     attrs ={
+        'id': 'text',
         'class':'form-control',
         'placeholder':'Comment here !',
         'rows':4,

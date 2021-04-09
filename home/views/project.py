@@ -38,10 +38,12 @@ def create_project(request):
 def project_details(request, id):
     project = get_object_or_404(Project, id=id)
     pictures = Project_Pictures.objects.all().filter(project_id=project)
+    comments = Comment.objects.all().filter(project_id=project)
     comment_form = CommentForm()
     context = {
         'project':project,
         'pictures':pictures,
+        'comments':comments,
         'comment_form':comment_form,
     }
     return render(request, 'project/project_details.html', context)
@@ -52,7 +54,8 @@ def project_comment(request, id):
         project = Project.objects.get(id = id)
         comment = Comment.objects.create(project_id = project, user_id = user, text = request.POST.get('text'), time = datetime.datetime.now())
         #return JsonResponse({'message':'It worked fine'})
-        return HttpResponseRedirect(request.path_info)
+        #return HttpResponseRedirect(request.path_info)
+        return render(request, 'project/project_comment.html', {'comment': comment})
 
 
 #   if request.method == 'POST':
