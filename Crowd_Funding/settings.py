@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     # 'home.apps.HomeConfig',
     'users',
     # 'users.apps.UsersConfig',
-    "verify_email",
+    'verify_email',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
