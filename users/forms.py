@@ -1,6 +1,6 @@
 from django import forms
-from django.contrib.auth.models import User 
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.validators import RegexValidator, validate_email
 from .models import Profile
 
@@ -14,7 +14,6 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        # fields = ['first_name', 'last_name', 'email', 'phone', 'password1', 'password2']
         fields = ['first_name', 'last_name', 'email', 'username', 'phone', 'password1', 'password2']
 
 
@@ -29,4 +28,4 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['country','facebook_profile','birth_date','image']
+        fields = ['country', 'facebook_profile', 'birth_date', 'image']

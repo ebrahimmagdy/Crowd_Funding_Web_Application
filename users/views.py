@@ -1,7 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.urls import reverse_lazy
+from django.views import generic
 from verify_email import send_verification_email
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from .forms import *
 
@@ -25,8 +28,20 @@ def register(request):
 def verify(request):
     return render(request, 'users/verify.html')
 
+
+####################
+# class UserEditView(generic.CreateView):
+#     form_class = UserChangeForm
+#     template_name = "users/edit_profile.html"
+#     success_url = reverse_lazy('home')
+#
+#     def get_object(self):
+#         return self.request.user
+####################
+
 @login_required
 def profile(request):
+    Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
