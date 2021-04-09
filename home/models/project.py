@@ -21,6 +21,8 @@ class Project(models.Model):
     rates = models.ManyToManyField(User, through='Rate_Project', related_name='user_rate')
     tags = TaggableManager()
 
+
+
 class Project_Pictures(models.Model):
     # id = models.BigAutoField(primary_key=True)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)

@@ -90,3 +90,8 @@ def tagged(request, slug):
         'posts':posts,
     }
     return render(request, 'home.html', context)
+from django.shortcuts import render
+
+
+def project(request):
+    return render(request, "project/project.html")
