@@ -2,7 +2,9 @@
 {% load static %}
 {% load crispy_forms_tags %}
     {% block styles %}
+        <link rel="stylesheet" href="{% static 'css/rating.css' %}">
         <link rel="stylesheet" href="{% static 'css/project.css' %}">
+        
     {% endblock %}
     {% block title %}
       Project info
@@ -49,11 +51,23 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
               </a>
-            </div>
+            </div>         
+
+
             <h3>Description</h3>
             <p>{{ project.details }}</p>
           </div>
           <div class="col-lg-4">
+
+            <div class="course-info d-flex justify-content-between align-items-center">
+              <h5>Start date</h5>
+              <p>{{ project.start_date }}</p>
+            </div>
+
+            <div class="course-info d-flex justify-content-between align-items-center">
+              <h5>End date</h5>
+              <p>{{ project.end_date }}</p>
+            </div>
 
             <div class="course-info d-flex justify-content-between align-items-center">
               <h5>Trainer</h5>
@@ -61,18 +75,31 @@
             </div>
 
             <div class="course-info d-flex justify-content-between align-items-center">
-              <h5>Course Fee</h5>
-              <p>$165</p>
+              <h5>Amount donated</h5>
+              <p>{{ donation.amount__sum }}</p>
             </div>
 
             <div class="course-info d-flex justify-content-between align-items-center">
-              <h5>Available Seats</h5>
-              <p>30</p>
+              <h5>Total target</h5>
+              <p>${{ project.total_target }}</p>
             </div>
 
-            <div class="course-info d-flex justify-content-between align-items-center">
-              <h5>Schedule</h5>
-              <p>5.00 pm - 7.00 pm</p>
+            
+            <div>
+              <form method="POST">
+                {% csrf_token %}
+                {{donation_form.as_p}}
+                <button id="donate_button" type="button" class="btn btn-primary d-block">Donate !</button>
+              </form>
+              <div id="donation-result"></div>
+            </div>
+            <div>
+              <form method="POST">
+                {% csrf_token %}
+                {{rating_form.as_p}}
+                <button id="rate_button" type="button" class="btn btn-primary d-block">Rate !</button>
+              </form>
+              <div id="rating-result"></div>
             </div>
 
           </div>
@@ -316,6 +343,37 @@
         error: function (data) {
           $("#result").html(
             '<p style="color:brown">error occured</p>'
+          );
+          console.log(data);
+        },
+      });
+    }
+  </script>
+  <script>
+    document
+      .getElementById("donate_button")
+      .addEventListener("click", save_amount);
+  
+    function save_amount() {
+      console.log("amount function fired");
+      var token = "{{csrf_token}}";
+      var amount = $("#amount").val();
+      $.ajax({
+        type: "POST",
+        headers: { "X-CSRFToken": token },
+        url: "donation",
+        data: { amount: amount },
+  
+        success: function (data) {
+          $("#donation-result").html(
+            '<p style="color:green">Donation Successfully Submitted</p>'
+          );
+          console.log(data);
+          // $('#comments').append(data)
+        },
+        error: function (data) {
+          $("#donation-result").html(
+            '<p style="color:red">error occured</p>'
           );
           console.log(data);
         },
