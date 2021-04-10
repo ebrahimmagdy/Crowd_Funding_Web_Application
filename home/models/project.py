@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from .category import Category
 from taggit.managers import TaggableManager
 from django import forms
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 class DateForm(forms.Form):
     date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'])
@@ -32,7 +34,6 @@ class Project_Pictures(models.Model):
 #     tag = models.CharField(max_length=100)
 
 class Donation(models.Model):
-    id = models.BigIntegerField(primary_key=True)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     amount = models.DecimalField(max_digits=6, decimal_places=2)
@@ -44,10 +45,11 @@ class Report_Project(models.Model):
     message = models.CharField(max_length=255)
 
 class Rate_Project(models.Model):
-    id = models.BigIntegerField(primary_key=True)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     rate = models.IntegerField()
+    # rate = fields.IntegerRangeField(min_value=1, max_value=5)
+    # rate = IntegerRangeField(default='(1,5)', blank=True, validators=[MinValueValidator(1), MaxValueValidator(5)])
 
 
 

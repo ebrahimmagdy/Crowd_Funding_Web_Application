@@ -1,5 +1,5 @@
 from django import forms
-from .models.project import Project, Project_Pictures
+from .models.project import Project, Project_Pictures, Donation, Rate_Project
 from .models.comment import Comment
 
 
@@ -42,3 +42,33 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields =['text',]
+
+class DonationForm(forms.ModelForm):
+    amount = forms.DecimalField(label ="", widget = forms.TextInput(
+    attrs ={
+        'id': 'amount',
+        'class':'form-control',
+        'placeholder':'donate here !',
+        'type':'number'
+        # 'rows':1,
+        # 'cols':50,
+    }))
+    class Meta:
+        model = Donation
+        fields = ('amount', )
+
+
+
+class RatingForm(forms.ModelForm):
+    rate = forms.IntegerField(label ="", widget = forms.TextInput(
+    attrs ={
+        'id': 'rate',
+        'class':'form-control',
+        'placeholder':'put your rate here !',
+        'type':'number'
+        # 'rows':1,
+        # 'cols':50,
+    }))
+    class Meta:
+        model = Rate_Project
+        fields = ('rate', )

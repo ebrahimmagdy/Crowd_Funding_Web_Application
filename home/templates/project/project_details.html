@@ -2,7 +2,9 @@
 {% load static %}
 {% load crispy_forms_tags %}
     {% block styles %}
+        <link rel="stylesheet" href="{% static 'css/rating.css' %}">
         <link rel="stylesheet" href="{% static 'css/project.css' %}">
+        
     {% endblock %}
     {% block title %}
       Project info
@@ -48,12 +50,27 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
               </a>
-            </div>
+            </div>         
+
+
             <h3>Description</h3>
             <p>{{ project.details }}</p>
           </div>
 
+
+
+
           <div class="col-lg-4">
+
+            <div class="course-info d-flex justify-content-between align-items-center">
+              <h5>Start date</h5>
+              <p>{{ project.start_date }}</p>
+            </div>
+
+            <div class="course-info d-flex justify-content-between align-items-center">
+              <h5>End date</h5>
+              <p>{{ project.end_date }}</p>
+            </div>
 
             <div class="course-info d-flex justify-content-between align-items-center">
               <h5>Trainer</h5>
@@ -61,21 +78,47 @@
             </div>
 
             <div class="course-info d-flex justify-content-between align-items-center">
-              <h5>Course Fee</h5>
-              <p>$165</p>
+              <h5>Amount donated</h5>
+              <p>{{ donation.amount__sum }}</p>
             </div>
 
             <div class="course-info d-flex justify-content-between align-items-center">
-              <h5>Available Seats</h5>
-              <p>30</p>
+              <h5>Total target</h5>
+              <p>${{ project.total_target }}</p>
             </div>
 
-            <div class="course-info d-flex justify-content-between align-items-center">
-              <h5>Schedule</h5>
-              <p>5.00 pm - 7.00 pm</p>
+            
+            <div>
+              <form method="POST">
+                {% csrf_token %}
+                {{donation_form.as_p}}
+                <button id="donate_button" type="button" class="btn btn-primary d-block">Donate !</button>
+              </form>
+              <div id="donation-result"></div>
+            </div>
+            <div>
+              <form method="POST">
+                {% csrf_token %}
+                {{rating_form.as_p}}
+                <button id="rate_button" type="button" class="btn btn-primary d-block">Rate !</button>
+              </form>
+              <div id="rating-result"></div>
             </div>
 
           </div>
+
+          <div class="container d-flex justify-content-center mt-100">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body text-center"> <span class="myratings">4.5</span>
+                            <h4 class="mt-1">Rate us</h4>
+                            <fieldset class="rating"> <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label> <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars"></label> <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label> <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="Meh - 3 stars"></label> <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label> <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="Kinda bad - 2 stars"></label> <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label> <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="Sucks big time - 1 star"></label> <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label> <input type="radio" class="reset-option" name="rating" value="reset" /> </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
           
           <div class="container pb-cmnt-container">
             <div class="row">
@@ -222,6 +265,10 @@
     </section>End Cource Details Tabs Section -->
 
   </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script src="{% static 'js/rating.js' %}"></script>
+
   <script>
     document
       .getElementById("project_form_button")
@@ -254,4 +301,66 @@
       });
     }
   </script>
+  <script>
+    document
+      .getElementById("donate_button")
+      .addEventListener("click", save_amount);
+  
+    function save_amount() {
+      console.log("amount function fired");
+      var token = "{{csrf_token}}";
+      var amount = $("#amount").val();
+      $.ajax({
+        type: "POST",
+        headers: { "X-CSRFToken": token },
+        url: "donation",
+        data: { amount: amount },
+  
+        success: function (data) {
+          $("#donation-result").html(
+            '<p style="color:green">Donation Successfully Submitted</p>'
+          );
+          console.log(data);
+          // $('#comments').append(data)
+        },
+        error: function (data) {
+          $("#donation-result").html(
+            '<p style="color:red">error occured</p>'
+          );
+          console.log(data);
+        },
+      });
+    }
+  </script>
+  <!-- <script>
+    document
+      .getElementById("rate_button")
+      .addEventListener("click", save_rate);
+  
+    function save_rate() {
+      console.log("rate function fired");
+      var token = "{{csrf_token}}";
+      var rate = $("#rate").val();
+      $.ajax({
+        type: "POST",
+        headers: { "X-CSRFToken": token },
+        url: "rate",
+        data: { rate: rate },
+  
+        success: function (data) {
+          $("#rating-result").html(
+            '<p style="color:green">Rating Successfully Submitted</p>'
+          );
+          console.log(data);
+          // $('#comments').append(data)
+        },
+        error: function (data) {
+          $("#rating-result").html(
+            '<p style="color:red">error occured</p>'
+          );
+          console.log(data);
+        },
+      });
+    }
+  </script> -->
 {% endblock %}
