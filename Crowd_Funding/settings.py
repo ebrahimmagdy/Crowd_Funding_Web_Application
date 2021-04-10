@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'Crowd_Funding.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Crowd_Funding',
+        'NAME': 'Crowd_Funding2',
         'USER': 'django',
         'PASSWORD': '12345678',
         'HOST': '127.0.0.1',
