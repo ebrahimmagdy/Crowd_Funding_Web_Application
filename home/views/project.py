@@ -10,7 +10,8 @@ from django.forms import modelformset_factory
 from django.http import JsonResponse
 import datetime
 import sys
-from django.db.models import Sum
+from django.db.models import Sum, Q
+
 
 def create_project(request):
     projects = Project.objects.order_by('id')
@@ -122,10 +123,9 @@ def project_rating(request, id):
     if request.user.is_authenticated:
         user = request.user
         project = Project.objects.get(id = id)
+        Rate_Project.objects.filter(Q(project_id=project) & Q(user_id=user)).delete()
         rate = Rate_Project.objects.create(project_id = project, user_id = user, rate = request.POST.get('rate'))
-        return JsonResponse({'message':'It worked fine'})
-from django.shortcuts import render
-
+        return JsonResponse({'message':'report project worked fine'})
 
 def project(request):
     return render(request, "project/project.html")
