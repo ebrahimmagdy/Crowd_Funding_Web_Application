@@ -286,11 +286,13 @@
         data: { text: text, project: project  },
   
         success: function (data) {
-          $("#result").html(
+          //console.log(data);
+          $('#text').val('');
+          $('#comments').append(data);
+          $(".card p-3").html(
             '<p style="color:brown">Form Successfully Submitted</p>'
           );
-          console.log(data);
-          $('#comments').append(data)
+          console.log(data); 
         },
         error: function (data) {
           $("#result").html(

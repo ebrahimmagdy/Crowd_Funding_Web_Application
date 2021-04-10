@@ -17,13 +17,14 @@
     <h2>Login to continue</h2>
     <p></p>
     <form>
+        {% csrf_token %}
       <div class="inputBox">
         <input type="email" name="email" required onkeyup="this.setAttribute('value', this.value);" value="">
         <label>Email</label>
       </div>
       <div class="inputBox">
-        <input type="text" name="text" required onkeyup="this.setAttribute('value', this.value);" value="">
-        <label>Passward</label>
+        <input type="password" name="password" required onkeyup="this.setAttribute('value', this.value);" value="">
+        <label>Password</label>
       </div>
       <input type="submit" name="sign-in" value="Login">
      <div class="signup">Don't have an account? <a href="{% url 'signup' %}" >Sign up</a></div>
