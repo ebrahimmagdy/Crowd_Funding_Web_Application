@@ -10,6 +10,6 @@ urlpatterns = [
     path("activate", user.activate, name="activate"),
     url(r'^project/(?P<id>\d+)/$', project.project_details, name="project_details"),
     url(r'^project/(?P<id>\d+)/comment$', project.project_comment, name="add_comment"),
-  
+    url(r'^project/(?P<id>\d+)/report$', project.project_report, name="report_project"),
 ]
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from home.models.project import Project, Project_Pictures
+from home.models.project import Project, Project_Pictures, Report_Project
 from home.models.comment import Comment, Report_Comment
 from django.contrib.auth.models import User 
 from home.forms import ProjectForm, ImageForm, CommentForm
@@ -57,6 +57,16 @@ def project_comment(request, id):
         #return HttpResponseRedirect(request.path_info)
         return render(request, 'project/project_comment.html', {'comment': comment, 'user': user})
 
+def project_report(request, id):
+    if request.user.is_authenticated:
+        user = request.user
+        project = Project.objects.get(id = id)
+        report = Report_Project.objects.create(project_id = project, user_id = user, message = request.POST.get('text'))
+        return JsonResponse({'message':'It worked fine'})
+        #return HttpResponseRedirect(request.path_info)
+        #return render(request, 'project/project_comment.html', {'comment': comment, 'user': user})
+
+
 def comment_report(request, id):
     if request.user.is_authenticated:
         user = request.user
@@ -90,7 +100,6 @@ def tagged(request, slug):
         'posts':posts,
     }
     return render(request, 'home.html', context)
-from django.shortcuts import render
 
 
 def project(request):
