@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from home.models.project import Project, Project_Pictures, Report_Project, Donation, Rate_Project
 from home.models.comment import Comment, Report_Comment
+from users.models import Profile
 from django.contrib.auth.models import User 
 from home.forms import ProjectForm, ImageForm, CommentForm, DonationForm, RatingForm
 from taggit.models import Tag
@@ -20,6 +21,7 @@ def create_project(request):
     if form.is_valid():
         project = form.save(commit=False)
         project.slug = slugify(project.title)
+        project.user_id = request.user
         project.save()
         form.save_m2m()
         pictures = request.FILES.getlist("photos")
@@ -41,6 +43,10 @@ def project_details(request, id):
     project = get_object_or_404(Project, id=id)
     pictures = Project_Pictures.objects.all().filter(project_id=project)
     comments = Comment.objects.all().filter(project_id=project)
+    commented_users = {}
+    profiles = {}
+    for comment in comments:
+        profiles[comment.id] = Profile.objects.get(user=comment.user_id)
     comment_form = CommentForm()
     donation_form = DonationForm()
     rating_form = RatingForm()
@@ -49,22 +55,24 @@ def project_details(request, id):
         'project':project,
         'pictures':pictures,
         'comments':comments,
+        'commented_users':commented_users,
+        'profiles':profiles,
         'comment_form':comment_form,
         'donation_form':donation_form,
         'rating_form':rating_form,
         'donation':donation,
-
     }
     return render(request, 'project/project_details.html', context)
 
 def project_comment(request, id):
     if request.user.is_authenticated:
         user = request.user
+        profile = Profile.objects.get(user = user)
         project = Project.objects.get(id = id)
         comment = Comment.objects.create(project_id = project, user_id = user, text = request.POST.get('text'), time = datetime.datetime.now())
         #return JsonResponse({'message':'It worked fine'})
         #return HttpResponseRedirect(request.path_info)
-        return render(request, 'project/project_comment.html', {'comment': comment, 'user': user})
+        return render(request, 'project/project_comment.html', {'comment': comment, 'user': user, 'profile': profile})
 
 def project_report(request, id):
     if request.user.is_authenticated:
