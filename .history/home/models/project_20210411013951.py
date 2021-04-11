@@ -29,8 +29,8 @@ class Project(models.Model):
 
 class Project_Pictures(models.Model):
     # id = models.BigAutoField(primary_key=True)
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, related_name='projects')
-    picture = models.ImageField(upload_to='projects', null=True, blank=True, verbose_name='Image')
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
+    picture = models.ImageField(upload_to='/static/img', null=True, blank=True, verbose_name='Image')
 
 # class Project_Tags(models.Model):
 #     id = models.BigIntegerField(primary_key=True)

@@ -232,7 +232,7 @@ Crowd Fund
           <div class="col-md-3 latestproject">
               <div class="card cardDes">
                    <a href="{% url 'project_details' p.id %}">
-                  <img src="/media/{{ p.projects.all.first.picture }}" class="card-img-top projImg"> </a>
+                  <img src="{{ p.projects.all.first.picture }}" class="card-img-top projImg"> </a>
                   <div class="card-body">
                     <h5 class="card-title">{{ p.title }}</h5>
                     <p class="card-text desc">{{p.details }}</p>
@@ -243,7 +243,7 @@ Crowd Fund
           <div class="col-md-6 latestproject">
               <div class="card cardDes">
                <a href="{% url 'project_details' p.id %}">
-                  <img src="/media/{{ p.projects.all.first.picture }}" class="card-img-top projImg"> </a>
+                  <img src="{{ p.projects.all.first.picture }}" class="card-img-top projImg"> </a>
                   <div class="card-body">
                     <h5 class="card-title">{{p.title }}</h5>
                     <p class="card-text desc">{{p.details }}</p>
@@ -254,7 +254,7 @@ Crowd Fund
           <div class="col-md-6 latestproject">
               <div class="card cardDes">
                    <a href="{% url 'project_details' p.id %}">
-                  <img src="/media/{{ p.projects.all.first.picture }}" class="card-img-top projImg"> </a>
+                  <img src="{{ p.projects.all.first.picture }}" class="card-img-top projImg"> </a>
                   <div class="card-body">
                     <h5 class="card-title">{{p.title }}</h5>
                     <p class="card-text desc">{{p.details }}</p>
