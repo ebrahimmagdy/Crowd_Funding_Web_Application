@@ -1,12 +1,14 @@
 from django.urls import path
 from django.conf.urls import url
-from .views import home, user, project, profile
+from .views import home, user, project, profile, search
 
 urlpatterns = [
     path("home", home.home, name="home"),
     #path("login", user.login, name="login"),
     #path("signup", user.signup, name="signup"),
     path("project", project.create_project, name="project"),
+    path("show_projects", home.show_projects, name="show_projects"),
+
     path("activate", user.activate, name="activate"),
     url(r'^project/(?P<id>\d+)/$', project.project_details, name="project_details"),
     url(r'^project/(?P<id>\d+)/comment$', project.project_comment, name="add_comment"),

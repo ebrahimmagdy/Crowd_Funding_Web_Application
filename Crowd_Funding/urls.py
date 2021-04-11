@@ -23,6 +23,7 @@ from users import views as user_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
+
     #path('api/', include('comment.api.urls')),
     path('register/', user_views.register, name='register'),
     path('verification/', include('verify_email.urls')),
