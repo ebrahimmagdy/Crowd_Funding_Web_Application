@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from verify_email import send_verification_email
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-
+from home.models.project import Project
 from .forms import *
 
 
@@ -63,3 +63,13 @@ def profile(request):
     }
 
     return render(request, 'users/profile.html', context)
+@login_required
+def user_projects(request):
+    print(request.user.profile.user_id)
+    projects=Project.objects.filter(user_id=request.user.profile.user_id)
+    context={
+        'range': range(5),
+        'projects':projects
+        
+    }
+    return render(request,'users/user_projects.html',context)
