@@ -146,8 +146,11 @@
                     </div>
                     <div id="comments">
                       {% for comment in comments %}
-                        {% include "project/project_comment.html" with comment=comment %}
+                        {% with comment.user_id as user %}
+                          {% include "project/project_comment.html" with comment=comment user=user profile=user.user_profile %}
+                        {% endwith %}
                       {% endfor %}
+                      
                     </div>
                     
                     <!-- <div class="card p-3 mt-2">
