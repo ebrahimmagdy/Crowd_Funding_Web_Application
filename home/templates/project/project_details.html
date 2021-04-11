@@ -53,11 +53,25 @@
               </a>
             </div>         
 
-
+            <button id="project_id" type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-whatever="{{ project.id }}">Report</button>
+            {% if  current_user == project.user_id and is_deletable == 1 %}
+              <form action="delete">
+                <button id="delete_project" type="submit" class="btn">Delete</button>
+              </form>
+            {% endif %}
             <h3>Description</h3>
             <p>{{ project.details }}</p>
           </div>
           <div class="col-lg-4">
+
+            <div class="course-info d-flex justify-content-between align-items-center">
+              <h5>Rate</h5>
+              {% if rate == None %}
+                <p>unrated</p>
+              {% else %}
+                <p>{{ rate }} / 5</p>
+              {% endif %}
+            </div>
 
             <div class="course-info d-flex justify-content-between align-items-center">
               <h5>Start date</h5>
@@ -70,13 +84,13 @@
             </div>
 
             <div class="course-info d-flex justify-content-between align-items-center">
-              <h5>Trainer</h5>
-              <p><a href="#">Walter White</a></p>
-            </div>
-
-            <div class="course-info d-flex justify-content-between align-items-center">
               <h5>Amount donated</h5>
-              <p>{{ donation.amount__sum }}</p>
+              {% if donation.amount == None %}
+                <p>0</p>
+              {% else %}
+                <p id='old_donation'>{{ donation.amount }}</p>
+              {% endif %}
+              
             </div>
 
             <div class="course-info d-flex justify-content-between align-items-center">
@@ -93,20 +107,12 @@
               </form>
               <div id="donation-result"></div>
             </div>
-            <div>
-              <form method="POST">
-                {% csrf_token %}
-                {{rating_form.as_p}}
-                <button id="rate_button" type="button" class="btn btn-primary d-block">Rate !</button>
-              </form>
-              <div id="rating-result"></div>
-            </div>
 
           </div>
           <div class="container d-flex justify-content-center mt-100">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card">
+                    <div class="card_rate">
                         <div class="card-body text-center"> <span class="myratings">4.5</span>
                             <h4 class="mt-1">Rate us</h4>
                             <fieldset class="rating"> <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label> <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars"></label> <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label> <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="Meh - 3 stars"></label> <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label> <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="Kinda bad - 2 stars"></label> <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label> <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="Sucks big time - 1 star"></label> <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label> <input type="radio" class="reset-option" name="rating" value="reset" /> </fieldset>
@@ -115,8 +121,7 @@
                 </div>
             </div>
         </div>
-          <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">Report</button>
-
+          
           <div class="container pb-cmnt-container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
@@ -152,7 +157,25 @@
                       {% endfor %}
                       
                     </div>
-                    
+                    {% for p in similar_projects %}
+                        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                              <div class="course-item">
+                                  <a href="{% url 'project_details' p.id %}">
+                                <img src="/media/{{ p.projects.all.first.picture }}"  class="img-fluid" alt="...">
+                                <div class="course-content">
+                                  <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4>{{ p.category }}</h4>
+                                    <p class="price">$ {{p.total_target}}</p>
+                                  </div>
+
+                                  <h3><a href="course-details.html">{{p.title}} </a></h3>
+                                  <p>{{p.details}}</p>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                     <!-- <div class="card p-3 mt-2">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/ZSkeqnd.jpg" width="30" class="user-img rounded-circle mr-2"> <span><small class="font-weight-bold text-primary">simona_rnasi</small> <small class="font-weight-bold text-primary">@macky_lones</small> <small class="font-weight-bold text-primary">@rashida_jones</small> <small class="font-weight-bold">Thanks </small></span> </div> <small>3 days ago</small>
@@ -320,6 +343,7 @@
 <script>
   $('#exampleModal1').on('show.bs.modal1', function (event) {
       var button = $(event.relatedTarget) // Button that triggered the modal
+      var comment_id = button.data('whatever')
       // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
       // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
       var modal1 = $(this)
@@ -329,10 +353,11 @@
       .addEventListener("click", save_comment_report);
   
     function save_comment_report() {
-      console.log("function fired post report");
+      console.log("function fired comment report");
       var token = "{{csrf_token}}";
       var text = $("#comment_report").val();
-      console.log(text);
+      var c_text = $("#comment_text").val();
+      alert(text);
       $.ajax({
         type: "POST",
         headers: { "X-CSRFToken": token },
@@ -360,7 +385,10 @@
       var button = $(event.relatedTarget) // Button that triggered the modal
       // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
       // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      var comment_id = button.data('whatever')
+      console.log(comment_id);
       var modal = $(this)
+      modal.find('.modal-title').text('Reporttt this Project ' + comment_id)
   });
   document
       .getElementById("submit_project_report")
@@ -435,6 +463,7 @@
       console.log("amount function fired");
       var token = "{{csrf_token}}";
       var amount = $("#amount").val();
+      var old_amount = $('#old_donation').val();
       $.ajax({
         type: "POST",
         headers: { "X-CSRFToken": token },
@@ -445,6 +474,8 @@
           $("#donation-result").html(
             '<p style="color:green">Donation Successfully Submitted</p>'
           );
+          $("#amount").val('');
+          $('#old_donation').val(old_amount + amount);
           console.log(data);
           // $('#comments').append(data)
         },

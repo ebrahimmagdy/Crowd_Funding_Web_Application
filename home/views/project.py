@@ -11,7 +11,7 @@ from django.forms import modelformset_factory
 from django.http import JsonResponse
 import datetime
 import sys
-from django.db.models import Sum, Q
+from django.db.models import Sum, Count, Avg, Q
 
 
 def create_project(request):
@@ -43,6 +43,11 @@ def project_details(request, id):
     project = get_object_or_404(Project, id=id)
     pictures = Project_Pictures.objects.all().filter(project_id=project)
     comments = Comment.objects.all().filter(project_id=project)
+    rate = Rate_Project.objects.all().filter(project_id=project).aggregate(rate=Avg('rate'))
+    tag = Project.tags.all().filter(project=project)[:1]
+    print(tag)
+    similar_projects = Project.objects.all().filter(tags=tag)
+    print(similar_projects)
     commented_users = {}
     profiles = {}
     for comment in comments:
@@ -50,7 +55,12 @@ def project_details(request, id):
     comment_form = CommentForm()
     donation_form = DonationForm()
     rating_form = RatingForm()
-    donation = Donation.objects.all().filter(project_id=project).aggregate(Sum('amount'))
+    donation = Donation.objects.all().filter(project_id=project).aggregate(amount=Sum('amount'))
+    is_deletable = 0
+    if donation['amount'] is None:
+        donation['amount'] = 0
+    if donation['amount'] < project.total_target / 4:
+        is_deletable = 1
     context = {
         'project':project,
         'pictures':pictures,
@@ -61,6 +71,10 @@ def project_details(request, id):
         'donation_form':donation_form,
         'rating_form':rating_form,
         'donation':donation,
+        'rate':rate['rate'],
+        'current_user':request.user,
+        'is_deletable':is_deletable,
+        'similar_projects':similar_projects,
     }
     return render(request, 'project/project_details.html', context)
 
@@ -126,6 +140,10 @@ def project_donation(request, id):
         return JsonResponse({'message':'It worked fine'})
         # return render(request, 'project/project_details.html', {'donation': donation})
 
+def project_delete(request, id):
+    if request.user.is_authenticated:
+        project = Project.objects.get(id = id).delete()
+        return redirect("home")
 
 def project_rating(request, id):
     if request.user.is_authenticated:

@@ -80,7 +80,7 @@ h1 {
     margin-top: 100px
 }
 
-.card {
+ .card_rate {
     position: relative;
     display: flex;
     width: 350px;
@@ -94,7 +94,7 @@ h1 {
     -webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
     -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
     box-shadow: 0px 0px 5px 0px rgb(161, 163, 164)
-}
+} 
 
 .card .card-body {
     padding: 1rem 1rem
@@ -117,7 +117,7 @@ h4 {
     outline: none
 }
 
-.btn {
+/* .btn {
     border-radius: 22px;
     text-transform: capitalize;
     font-size: 13px;
@@ -129,4 +129,6 @@ h4 {
 
 .btn:hover {
     background-color: #D32F2F !important
-}
+} */
+
+

@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^project/(?P<id>\d+)/reportcomment$', project.comment_report, name="report_comment"),
     url(r'^project/(?P<id>\d+)/donation$', project.project_donation, name="submit_donation"),
     url(r'^project/(?P<id>\d+)/rate$', project.project_rating, name="submit_rating"),
+    url(r'^project/(?P<id>\d+)/delete$', project.project_delete, name="delete_project"),
 ]
 

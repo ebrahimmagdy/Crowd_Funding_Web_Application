@@ -4,7 +4,7 @@
             <img src="{{ profile.image.url }}" width="30" class="user-img rounded-circle mr-2"> 
             <span>
                 <small class="font-weight-bold text-primary">{{ user.username }}</small>
-                <small class="font-weight-bold">{{ comment.text }}</small>
+                <small id="comment_text" class="font-weight-bold">{{ comment.text }}</small>
             </span> 
         </div> 
         <small>{{ comment.time }}</small>
@@ -15,7 +15,7 @@
             <span class="dots"></span> 
             <!-- <small>Reply</small>  -->
             <span class="dots"></span>
-            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal1"><small>Report a comment</small></button> 
+            <button id="{{ comment.id }}" type="button" class="btn" data-toggle="modal" data-target="#exampleModal1" data-whatever="{{ comment.id }}"><small>Report a comment</small></button> 
         </div>
         <!-- <div class="icons align-items-center"> <i class="fa fa-star text-warning"></i> <i class="fa fa-check-circle-o check-icon"></i> </div> -->
     </div>
