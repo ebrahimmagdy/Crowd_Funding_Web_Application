@@ -43,7 +43,6 @@ class Donation(models.Model):
     amount = models.DecimalField(max_digits=6, decimal_places=2)
 
 class Report_Project(models.Model):
-    id = models.BigIntegerField(primary_key=True)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     message = models.CharField(max_length=255)

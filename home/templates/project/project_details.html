@@ -23,6 +23,7 @@
     </div><!-- End Breadcrumbs -->
 
     <!-- ======= Cource Details Section ======= -->
+
     <section id="course-details" class="course-details">
       <div class="container" data-aos="fade-up">
 
@@ -56,10 +57,6 @@
             <h3>Description</h3>
             <p>{{ project.details }}</p>
           </div>
-
-
-
-
           <div class="col-lg-4">
 
             <div class="course-info d-flex justify-content-between align-items-center">
@@ -106,7 +103,6 @@
             </div>
 
           </div>
-
           <div class="container d-flex justify-content-center mt-100">
             <div class="row">
                 <div class="col-md-6">
@@ -119,7 +115,8 @@
                 </div>
             </div>
         </div>
-          
+          <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">Report</button>
+
           <div class="container pb-cmnt-container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
@@ -137,7 +134,7 @@
                 </div>
             </div>
         </div>
-
+        
           <div class="container mt-5">
             <div class="row d-flex ">
                 <div class="col-md-8">
@@ -265,10 +262,133 @@
     </section>End Cource Details Tabs Section -->
 
   </main>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <script src="{% static 'js/rating.js' %}"></script>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Report this Project</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">type your report here:</label>
+              <textarea class="form-control" id="project_report"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="submit_project_report">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div> 
 
+  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Report this Comment</h5>
+           <button type="button" class="close" data-dismiss="modal1" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+           <form>
+             <div class="form-group">
+               <label for="message-text" class="col-form-label">type your report here:</label>
+               <textarea class="form-control" id="comment_report"></textarea>
+             </div>
+           </form>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal1">Cancel</button>
+           <button type="button" class="btn btn-primary" data-dismiss="modal1" id="submit_comment_report">Submit</button>
+         </div>
+       </div>
+     </div>
+   </div> 
+
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+<script>
+  $('#exampleModal1').on('show.bs.modal1', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      var modal1 = $(this)
+  });
+  document
+      .getElementById("submit_comment_report")
+      .addEventListener("click", save_comment_report);
+  
+    function save_comment_report() {
+      console.log("function fired post report");
+      var token = "{{csrf_token}}";
+      var text = $("#comment_report").val();
+      console.log(text);
+      $.ajax({
+        type: "POST",
+        headers: { "X-CSRFToken": token },
+        url: "reportcomment",
+        data: { text: text },
+  
+        success: function (data) {
+          //console.log(data);
+          // $('#text').val('');
+          // $('#comments').append(data);
+          // $(".card p-3").html(
+          //   '<p style="color:brown">Form Successfully Submitted</p>'
+          // );
+          console.log(data); 
+        },
+        error: function (data) {
+          console.log(data);
+        },
+      });
+    }
+</script>
+
+<script>
+  $('#exampleModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      var modal = $(this)
+  });
+  document
+      .getElementById("submit_project_report")
+      .addEventListener("click", save_project_report);
+  
+    function save_project_report() {
+      console.log("function fired post report");
+      var token = "{{csrf_token}}";
+      var text = $("#project_report").val();
+      console.log(text);
+      $.ajax({
+        type: "POST",
+        headers: { "X-CSRFToken": token },
+        url: "report",
+        data: { text: text },
+  
+        success: function (data) {
+          //console.log(data);
+          // $('#text').val('');
+          // $('#comments').append(data);
+          // $(".card p-3").html(
+          //   '<p style="color:brown">Form Successfully Submitted</p>'
+          // );
+          console.log(data); 
+        },
+        error: function (data) {
+          console.log(data);
+        },
+      });
+    }
+</script>
   <script>
     document
       .getElementById("project_form_button")
@@ -334,35 +454,31 @@
       });
     }
   </script>
-  <!-- <script>
-    document
-      .getElementById("rate_button")
-      .addEventListener("click", save_rate);
-  
-    function save_rate() {
-      console.log("rate function fired");
-      var token = "{{csrf_token}}";
-      var rate = $("#rate").val();
-      $.ajax({
+  <script>
+    var sim = 0;
+    $(document).ready(function(){
+    $("input[type='radio']").click(function(){
+    sim = $("input[type='radio']:checked").val();
+    alert(sim);
+    if (sim<3) { $('.myratings').css('color','red'); $(".myratings").text(sim); }else{ $('.myratings').css('color','green'); $(".myratings").text(sim); } 
+    var token = "{{csrf_token}}";
+    $.ajax({
         type: "POST",
         headers: { "X-CSRFToken": token },
         url: "rate",
-        data: { rate: rate },
+        data: { rate: sim },
   
         success: function (data) {
-          $("#rating-result").html(
-            '<p style="color:green">Rating Successfully Submitted</p>'
-          );
+          
           console.log(data);
           // $('#comments').append(data)
         },
         error: function (data) {
-          $("#rating-result").html(
-            '<p style="color:red">error occured</p>'
-          );
+          
           console.log(data);
         },
       });
-    }
-  </script> -->
+    });
+  });
+  </script>
 {% endblock %}
