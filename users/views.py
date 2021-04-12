@@ -6,6 +6,7 @@ from django.views import generic
 from verify_email import send_verification_email
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
+from home.models.category import Category
 from .forms import *
 
 
@@ -57,9 +58,12 @@ def profile(request):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
+
+    categories = Category.objects.all()
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'categories': categories
     }
 
     return render(request, 'users/profile.html', context)

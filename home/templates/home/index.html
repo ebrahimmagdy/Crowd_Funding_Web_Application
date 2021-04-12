@@ -8,10 +8,35 @@ Crowd Fund
 {% block content %}
 
 {% block login_and_search %}
-    <form class="example" style="margin-left:3%; max-width:300px">
-      <input type="text" placeholder="Search for projects...">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
+{#    <form class="example" style="margin-left:3%; max-width:300px">#}
+{#      <input type="text" placeholder="Search for projects...">#}
+{#      <button type="submit"><i class="fa fa-search"></i></button>#}
+{#    </form>#}
+
+{#     <form method="POST" action="{% url 'search' %}" id="searchform">#}
+{#                <div class="row">#}
+{#                    <div class="col-lg-12">#}
+{#                        {% csrf_token %}#}
+{#                        <input class="searchfield form-control form-control-lg"#}
+{#                               id="searchbox" name="searched" type="text"#}
+{#                               value="{{ request.GET.q }}" placeholder="Search for project ..."/>#}
+{#                    </div>#}
+{#                </div>#}
+{#     </form>#}
+
+    <form method="GET" action="search" id="searchform">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <input class="searchfield form-control form-control-lg" id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search for project ..."/>
+                    </div>
+                </div>
+            </form>
+
+{#    <form action="{% url 'search' %}" method="GET" value="{{request.GET.q}}">#}
+{#Search <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search posts"/>#}
+{#<input type="submit" name="submit" value="Search"/>#}
+{#</form>#}
+
 {% endblock %}
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex justify-content-center align-items-center">
@@ -72,9 +97,8 @@ Crowd Fund
         <h2>Projects</h2>
         <p>Top Rated Projects</p>
       </div>
-
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
         {% for p in hRProjects %}
-            <div class="row" data-aos="zoom-in" data-aos-delay="100">
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
                   <div class="course-item">
                       <a href="{% url 'project_details' p.id %}">
@@ -84,14 +108,13 @@ Crowd Fund
                         <h4>{{ p.category }}</h4>
                         <p class="price">$ {{p.total_target}}</p>
                       </div>
-
-                      <h3><a href="course-details.html">{{p.title}} </a></h3>
+                      <h3><a href="{% url 'project_details' p.id %}">{{p.title}} </a></h3>
                       <p>{{p.details}}</p>
                     </div>
                   </div>
                 </div>
-             </div>
         {% endfor %}
+        </div>
     </div>
   </section>
 
@@ -105,7 +128,6 @@ Crowd Fund
       </div>
     <div class="row" data-aos="zoom-in" data-aos-delay="100">
       {% for p in latestFiveList %}
-{#          <div class="row" data-aos="zoom-in" data-aos-delay="100">#}
             <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
               <div class="course-item">
                   <a href="{% url 'project_details' p.id %}">
@@ -115,12 +137,11 @@ Crowd Fund
                     <h4>{{ p.category }}</h4>
                     <p class="price">$ {{p.total_target}}</p>
                   </div>
-                  <h3><a href="course-details.html">{{p.title}} </a></h3>
+                  <h3><a href="{% url 'project_details' p.id %}">{{p.title}} </a></h3>
                   <p>{{p.details}}</p>
                 </div>
               </div>
             </div>
-{#          </div>#}
       {% endfor %}
     </div>
       </div>
@@ -135,19 +156,23 @@ Crowd Fund
         <h2>Projects</h2>
         <p>Featured Projects</p>
       </div>
-      <div class="row">
-        {% for p in fProject %}
-            <div class="fproject">
-                <div class="card cardDes">
-                     <a href="{% url 'project_details' p.id %}">
-                    <img src="/media/{{ p.projects.all.first.picture }}" class="card-img-top projImg"> </a>
-                    <div class="card-body">
-                      <h5 class="card-title">{{p.title }}</h5>
-                      <p class="card-text desc">{{p.details }}</p>
-                    </div>
+      <div class="row" data-aos="zoom-in" data-aos-delay="100">
+          {% for p in fProject %}
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+              <div class="course-item">
+                  <a href="{% url 'project_details' p.id %}">
+                <img src="/media/{{ p.projects.all.first.picture }}"  class="img-fluid" alt="...">
+                <div class="course-content">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4>{{ p.category }}</h4>
+                    <p class="price">$ {{p.total_target}}</p>
+                  </div>
+                  <h3><a href="{% url 'project_details' p.id %}">{{p.title}} </a></h3>
+                  <p>{{p.details}}</p>
                 </div>
+              </div>
             </div>
-        {% endfor %}
+      {% endfor %}
       </div>
       <!-- <div class="row" data-aos="zoom-in" data-aos-delay="100">
 

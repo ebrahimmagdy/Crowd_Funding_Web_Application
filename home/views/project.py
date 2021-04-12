@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+
+from home.models.category import Category
 from home.models.project import Project, Project_Pictures, Report_Project, Donation, Rate_Project
 from home.models.comment import Comment, Report_Comment
 from users.models import Profile
@@ -32,10 +34,12 @@ def create_project(request):
             )
 
         return redirect("project_details", id=project.id)
+    categories = Category.objects.all()
     context = {
         'projects': projects,
         'common_tags': common_tags,
         'form': form,
+        'categories': categories
     }
     return render(request, 'project/project_form.html', context)
 
@@ -52,6 +56,7 @@ def project_details(request, id):
     donation_form = DonationForm()
     rating_form = RatingForm()
     donation = Donation.objects.all().filter(project_id=project).aggregate(Sum('amount'))
+    categories = Category.objects.all()
     context = {
         'project': project,
         'pictures': pictures,
@@ -62,11 +67,17 @@ def project_details(request, id):
         'donation_form': donation_form,
         'rating_form': rating_form,
         'donation': donation,
+        'categories': categories
     }
     return render(request, 'project/project_details.html', context)
 
 
-
+# def search(request):
+#     q = request.GET.get("q")
+#     projects = Project.objects.filter(Q(title__icontains=q))
+#
+#     return render(request, 'project/search.html', {"projects": projects})
+#
 
 
 def project_comment(request, id):
@@ -120,9 +131,11 @@ def tagged(request, slug):
     tag = get_object_or_404(Tag, slug=slug)
     # Filter posts by tag name  
     posts = Post.objects.filter(tags=tag)
+    categories = Category.objects.all()
     context = {
         'tag': tag,
         'posts': posts,
+        'categories': categories
     }
     return render(request, 'home.html', context)
 
@@ -149,10 +162,21 @@ def project(request):
     return render(request, "project/project.html")
 
 
-def search(request):
-    proj_name = request.GET.get('search2')
-    if proj_name:
-        project = Project.objects.filter(Q(title=proj_name))[:1]
-    else:
-        proj_name = ' '
-    return project_details(request, project)
+def categories(request, id):
+    projects = Project.objects.all().filter(category=id)
+    categories = Category.objects.all()
+
+    context = {
+        "projects": projects,
+        "categories": categories,
+    }
+
+    return render(request, 'project/categories.html', context)
+
+# def search(request):
+#     proj_name = request.GET.get('search2')
+#     if proj_name:
+#         project = Project.objects.filter(Q(title=proj_name))[:1]
+#     else:
+#         proj_name = ' '
+#     return project_details(request, project)
