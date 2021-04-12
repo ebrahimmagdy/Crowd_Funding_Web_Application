@@ -4,12 +4,12 @@ from PIL import Image
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     country = models.CharField(null=True, max_length=20)
     facebook_profile = models.CharField(null=True, max_length=20)
     birth_date = models.DateField(null=True)
     image = models.ImageField(default='default.png', upload_to='profile_pics')
-
+    
     def __str__(self):
         return f'{self.user.username} Profile'
 

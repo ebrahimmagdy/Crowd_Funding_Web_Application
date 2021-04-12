@@ -39,10 +39,7 @@ INSTALLED_APPS = [
     'home',
     'crispy_forms',
     'taggit',
-
-    # 'home.apps.HomeConfig',
     'users',
-    # 'users.apps.UsersConfig',
     'verify_email',
 ]
 

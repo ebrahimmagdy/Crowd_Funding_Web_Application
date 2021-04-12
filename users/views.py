@@ -5,9 +5,12 @@ from django.urls import reverse_lazy
 from django.views import generic
 from verify_email import send_verification_email
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from home.models.project import Project
 
+from home.models.category import Category
 from .forms import *
 
+from django.shortcuts import get_object_or_404
 
 def register(request):
     if request.method == 'POST':
@@ -57,9 +60,47 @@ def profile(request):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
+
+    categories = Category.objects.all()
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'categories': categories
     }
 
     return render(request, 'users/profile.html', context)
+@login_required
+def user_projects(request):
+    
+    projects=Project.objects.filter(user_id=request.user.id)
+    context={
+        'range': range(5),
+        'projects':projects
+        
+    }
+    return render(request,'users/user_projects.html',context)
+
+
+def confirm_delete(request,email):
+    user = get_object_or_404(User,email=email)
+    context={
+        'user':user,
+    }
+    return render(request,'users/user_confirm_delete.html',context)
+def delete_user(request,id):
+    context = {
+        
+    }
+    try:
+        user = get_object_or_404(User,id=id)   
+        user.is_active = False
+        user.save()
+        context['msg'] = 'Profile successfully disabled.'
+    except User.DoesNotExist: 
+        context['msg'] = 'User does not exist.'
+   
+    
+    return render(request, 'home/index.html', context=context) 
+
+
+

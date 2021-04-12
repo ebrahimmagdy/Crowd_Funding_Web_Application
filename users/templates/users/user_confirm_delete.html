@@ -1,0 +1,24 @@
+
+{% load static %}
+<html>
+
+<title> Delete account Confirmation</title>
+<head>
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- <form method="post" action="{% url 'home' %}">
+        {% csrf_token %} -->
+        <div >
+        <h3>Are you sure you want to delete your account " {{ user.email }} "?</h3>
+        <a href="{% url 'delete_user' user.id %}">Confirm</a> 
+        <a href="{% url 'home' %}">Cancel</a>
+        </div>
+    <!-- </form>
+    -->
+</body>
+</html>
+  
+    
