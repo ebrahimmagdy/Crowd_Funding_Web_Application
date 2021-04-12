@@ -18,11 +18,13 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
-
+    
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    email = forms.EmailField(disabled=True)
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ['username','first_name','last_name','email']
 
 
 class ProfileUpdateForm(forms.ModelForm):

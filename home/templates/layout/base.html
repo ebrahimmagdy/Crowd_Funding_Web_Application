@@ -41,16 +41,24 @@
 </head>
 <body>
 
+  
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-
-      <h1 class="logo mr-auto"><a href="index.html">Crowd Fund</a></h1>
+      
+      <h1 class="logo mr-auto"><a href="{% url 'home' %}">Crowd Fund</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-      <nav class="nav-menu d-none d-lg-block">
+      {% block search %}  {% endblock %}
+      <nav class="nav-menu d-none d-lg-block" style="margin-right:6%">
+        
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
+          <!-- <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form> -->
+
+          <li class="active"><a href="{% url 'home' %}">Home</a></li>
+
           <li><a href="about.html">About</a></li>
           <li><a href="courses.html">Projects</a></li>
           <li class="drop-down"><a href="">Categories</a>
@@ -59,27 +67,49 @@
               <li><a href="#">Shelters</a></li>
               <li><a href="#">Dept Funding</a></li>
               <li><a href="#">Education</a></li>
-                <li><a href="#">Animals</a></li>
+              <li><a href="#">Animals</a></li>
             </ul>
-          <li><a href="contact.html">Contact</a></li>
-
+          <!-- <li><a href="contact.html">Contact</a></li> -->
+           
         </ul>
+        
       </nav><!-- .nav-menu -->
-
+       
      {% if user.is_authenticated %}
-         <a href="{% url 'profile' %}" class="get-started-btn"><i style="font-size: 17px"></i>Profile</a>
-         <a href="{% url 'login' %}" class="get-started-btn"><i style="font-size: 17px"></i>Logout</a>
+     
+         <h4 class="account-heading" style="margin:2%"><a href="{% url 'profile' %}"> {{ user.username }}</a></h4>
+         <div class="dropdown show">
+          <a class=dropdown-toggle href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="rounded-circle account-img" width="50" height="50" src="{{ user.profile.image.url }}" >
+          </a>
+        
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <!-- <a class="dropdown-item" href="{% url 'profile' %}">Signed in as {{user.username}}</a> -->
+            <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
+            <a class="dropdown-item" href="{% url 'user_projects' %}">My Projects</a>
+            <a class="dropdown-item" href="#">My Donations</a>
+            <a class="dropdown-item" href="#">Change Password</a>
+            <a class="dropdown-item" href="{% url 'user_confirm_delete' user.email %}">Delete Account</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+
+
+          </div>
+        </div>
     {% else %}
          <a href="{% url 'login' %}" class="get-started-btn"><i class='bx bx-lock-alt'  style="font-size: 17px"></i> Login</a>
     {% endif %}
 
+   
+
+
+   
 {#        ======= Search Section =======#}
 
 {#      <form class="example" action="" style="margin-left:3%; max-width:300px">#}
 {#          <input type="text" placeholder="Search for projects..." name="search2">#}
 {#          <button type="submit"><i class="fa fa-search"></i></button>#}
 {#      </form> #}
-    {% block login_and_search %}  {% endblock %}
+  
     </div>
 
   </header>

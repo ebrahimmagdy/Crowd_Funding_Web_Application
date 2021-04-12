@@ -6,24 +6,25 @@ Crowd Fund
 {% endblock %}
 
 {% block content %}
-{% block login_and_search %}
+{% block search %}
 
-{# <a href="{% url 'login' %}" class="get-started-btn"><i class='bx bx-lock-alt' style="font-size: 17px"></i> Login</a>#}
+<!-- {# <a href="{% url 'login' %}" class="get-started-btn"><i class='bx bx-lock-alt' style="font-size: 17px"></i> Login</a>#} -->
 {##}
 {#<!-- ======= Search Section ======= -->#}
 {##}
-<form class="example" action="" style="margin-left:3%; max-width:300px">
+<form class="example" action="" style="margin-left:0%; max-width:400px">
   <input type="text" placeholder="Search for projects..." name="search2">
   <button type="submit"><i class="fa fa-search"></i></button>
 </form>
 {% endblock %}
+<!-- ======= Hero Section ======= -->
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex justify-content-center align-items-center">
 
   <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
     <h1>Change world,<br>better future</h1>
     <h2>We hope to make our world better</h2>
-    <a href="{% url 'register' %}" class="btn-get-started">Get Started</a>
+    <a href="courses.html" class="btn-get-started">Get Started</a>
   </div>
 </section>
 <!-- End Hero -->
@@ -63,6 +64,7 @@ Crowd Fund
           <a href="about.html" class="learn-more-btn">Learn More</a>
         </div>
       </div>
+    </section>End About Section -->
 
     </div>
   </section><!-- End About Section -->
