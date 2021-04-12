@@ -1,20 +1,27 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from home.models.project import Project, Project_Pictures
-from home.forms import ProjectForm, ImageForm
+from home.models.project import Project, Project_Pictures, Report_Project, Donation, Rate_Project
+from home.models.comment import Comment, Report_Comment
+from users.models import Profile
+from django.contrib.auth.models import User 
+from home.forms import ProjectForm, ImageForm, CommentForm, DonationForm, RatingForm
 from taggit.models import Tag
 from django.template.defaultfilters import slugify
 from django.forms.formsets import formset_factory
 from django.forms import modelformset_factory
+from django.http import JsonResponse
+import datetime
+import sys
+from django.db.models import Sum, Count, Avg, Q
 
 
 def create_project(request):
     projects = Project.objects.order_by('id')
     common_tags = Project.tags.most_common()[:4]
     form = ProjectForm(request.POST or None)
-
     if form.is_valid():
         project = form.save(commit=False)
         project.slug = slugify(project.title)
+        project.user_id = request.user
         project.save()
         form.save_m2m()
         pictures = request.FILES.getlist("photos")
@@ -35,11 +42,84 @@ def create_project(request):
 def project_details(request, id):
     project = get_object_or_404(Project, id=id)
     pictures = Project_Pictures.objects.all().filter(project_id=project)
+    comments = Comment.objects.all().filter(project_id=project)
+    rate = Rate_Project.objects.all().filter(project_id=project).aggregate(rate=Avg('rate'))
+    tags = project.tags.names()
+    similar_projects = Project.objects.filter(tags__name__in=tags).order_by('id')[1:5]
+    commented_users = {}
+    profiles = {}
+    for comment in comments:
+        profiles[comment.id] = Profile.objects.get(user=comment.user_id)
+    comment_form = CommentForm()
+    donation_form = DonationForm()
+    rating_form = RatingForm()
+    donation = Donation.objects.all().filter(project_id=project).aggregate(amount=Sum('amount'))
+    is_deletable = 0
+    if donation['amount'] is None:
+        donation['amount'] = 0
+    if donation['amount'] < project.total_target / 4:
+        is_deletable = 1
     context = {
         'project':project,
         'pictures':pictures,
+        'comments':comments,
+        'commented_users':commented_users,
+        'profiles':profiles,
+        'comment_form':comment_form,
+        'donation_form':donation_form,
+        'rating_form':rating_form,
+        'donation':donation,
+        'rate':rate['rate'],
+        'current_user':request.user,
+        'is_deletable':is_deletable,
+        'similar_projects':similar_projects,
     }
     return render(request, 'project/project_details.html', context)
+
+def project_comment(request, id):
+    if request.user.is_authenticated:
+        user = request.user
+        profile = Profile.objects.get(user = user)
+        project = Project.objects.get(id = id)
+        comment = Comment.objects.create(project_id = project, user_id = user, text = request.POST.get('text'), time = datetime.datetime.now())
+        #return JsonResponse({'message':'It worked fine'})
+        #return HttpResponseRedirect(request.path_info)
+        return render(request, 'project/project_comment.html', {'comment': comment, 'user': user, 'profile': profile})
+
+def project_report(request, id):
+    if request.user.is_authenticated:
+        user = request.user
+        project = Project.objects.get(id = id)
+        report = Report_Project.objects.create(project_id = project, user_id = user, message = request.POST.get('text'))
+        return JsonResponse({'message':'It worked fine'})
+        #return HttpResponseRedirect(request.path_info)
+        #return render(request, 'project/project_comment.html', {'comment': comment, 'user': user})
+
+
+def comment_report(request, id):
+    if request.user.is_authenticated:
+        user = request.user
+        cid = request.POST.get('id')
+        comment = Comment.objects.get(id = cid)
+        report = Report_Comment.objects.create(comment_id = comment, user_id = user, message = request.POST.get('text'))
+        return JsonResponse({'message':'Your report submited successfully!'})
+        #return HttpResponseRedirect(request.path_info)
+        #return render(request, 'project/project_comment.html', {'comment': comment, 'user': user})
+
+#   if request.method == 'POST':
+#     cf = CommentForm(request.POST or None)
+#     if cf.is_valid():
+#       text = request.POST.get('text')
+#       comment = Comment.objects.create(project_id = project, user_id = request.user, text = text)
+#       comment.save()
+#       return redirect(post.get_absolute_url())
+#     else:
+#       cf = CommentForm()
+        
+#     context ={
+#       'comment_form':cf,
+#       }
+#     return render(request, 'socio / post_detail.html', context)
 
 def tagged(request, slug):
     tag = get_object_or_404(Tag, slug=slug)
@@ -50,3 +130,27 @@ def tagged(request, slug):
         'posts':posts,
     }
     return render(request, 'home.html', context)
+
+def project_donation(request, id):
+    if request.user.is_authenticated:
+        user = request.user
+        project = Project.objects.get(id = id)
+        donation = Donation.objects.create(project_id = project, user_id = user, amount = request.POST.get('amount'))
+        return JsonResponse({'message':'It worked fine'})
+        # return render(request, 'project/project_details.html', {'donation': donation})
+
+def project_delete(request, id):
+    if request.user.is_authenticated:
+        project = Project.objects.get(id = id).delete()
+        return redirect("home")
+
+def project_rating(request, id):
+    if request.user.is_authenticated:
+        user = request.user
+        project = Project.objects.get(id = id)
+        Rate_Project.objects.filter(Q(project_id=project) & Q(user_id=user)).delete()
+        rate = Rate_Project.objects.create(project_id = project, user_id = user, rate = request.POST.get('rate'))
+        return JsonResponse({'message':'report project worked fine'})
+
+def project(request):
+    return render(request, "project/project.html")
