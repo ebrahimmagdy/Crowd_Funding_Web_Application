@@ -56,12 +56,11 @@
           <li><a href="{% url 'show_projects' %}">Projects</a></li>
           <li class="drop-down"><a href="">Categories</a>
             <ul>
-              <li><a href="#">Food Bank</a></li>
-              <li><a href="#">Shelters</a></li>
-              <li><a href="#">Dept Funding</a></li>
-              <li><a href="#">Education</a></li>
-              <li><a href="#">Animals</a></li>
+                {% for cat in categories %}
+                    <li><a href="{% url 'category' cat.id %}">{{cat.name}}</a></li>
+                {% endfor %}
             </ul>
+
           <li><a href="{% url 'project' %}">Create Project</a></li>
 
         </ul>

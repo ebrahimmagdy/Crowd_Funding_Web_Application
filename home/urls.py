@@ -7,10 +7,12 @@ urlpatterns = [
     #path("login", user.login, name="login"),
     #path("signup", user.signup, name="signup"),
     path("project", project.create_project, name="project"),
+    # path('search', project.search, name="search"),
+    path('categories', project.categories),
     path("show_projects", home.show_projects, name="show_projects"),
-
     path("activate", user.activate, name="activate"),
     url(r'^project/(?P<id>\d+)/$', project.project_details, name="project_details"),
+    url(r'^category/(?P<id>\d+)/$', project.categories, name="category"),
     url(r'^project/(?P<id>\d+)/comment$', project.project_comment, name="add_comment"),
     url(r'^project/(?P<id>\d+)/report$', project.project_report, name="report_project"),
     url(r'^project/(?P<id>\d+)/reportcomment$', project.comment_report, name="report_comment"),
