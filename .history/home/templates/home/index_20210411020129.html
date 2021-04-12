@@ -1,0 +1,576 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block title %}
+Crowd Fund
+{% endblock %}
+
+{% block content %}
+{% block login_and_search %}
+
+{# <a href="{% url 'login' %}" class="get-started-btn"><i class='bx bx-lock-alt' style="font-size: 17px"></i> Login</a>#}
+{##}
+{#<!-- ======= Search Section ======= -->#}
+{##}
+<form class="example" action="" style="margin-left:3%; max-width:300px">
+  <input type="text" placeholder="Search for projects..." name="search2">
+  <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+{% endblock %}
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex justify-content-center align-items-center">
+
+  <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
+    <h1>Change world,<br>better future</h1>
+    <h2>We hope to make our world better</h2>
+    <a href="{% url 'register' %}" class="btn-get-started">Get Started</a>
+  </div>
+</section>
+<!-- End Hero -->
+
+<main id="main">
+
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>About</h2>
+        <p>About Us</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+          <img src="{% static 'img/about.jpg' %}" class="img-fluid" alt="">
+        </div>
+        <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+          <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+          <p class="font-italic">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua.
+          </p>
+          <ul>
+            <li><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+            <li><i class="icofont-check-circled"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+            <li><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+              irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.
+            </li>
+          </ul>
+          <p>
+            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+          </p>
+          <a href="about.html" class="learn-more-btn">Learn More</a>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End About Section -->
+
+
+  <!-- ======= Top projects Section ======= -->
+  <section id="popular-courses" class="courses">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Projects</h2>
+        <p>Top Projects</p>
+      </div>
+
+      <div class="row" data-aos="zoom-in" data-aos-delay="100">
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="course-item">
+            <img src="{%  static 'img/course-1.jpg'%}" class="img-fluid" alt="...">
+            <div class="course-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Web Development</h4>
+                <p class="price">$169</p>
+              </div>
+
+              <h3><a href="course-details.html">Website Design</a></h3>
+              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem
+                tempore.</p>
+              <div class="trainer d-flex justify-content-between align-items-center">
+                <div class="trainer-profile d-flex align-items-center">
+                  <img src="{%  static 'img/trainers/trainer-1.jpg'%}" class="img-fluid" alt="">
+                  <span>Antonio</span>
+                </div>
+                <div class="trainer-rank d-flex align-items-center">
+                  <i class="bx bx-user"></i>&nbsp;50
+                  &nbsp;&nbsp;
+                  <i class="bx bx-heart"></i>&nbsp;65
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- End Course Item-->
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="course-item">
+            <img src="{%  static 'img/course-2.jpg'%}" class="img-fluid" alt="...">
+            <div class="course-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Marketing</h4>
+                <p class="price">$250</p>
+              </div>
+
+              <h3><a href="course-details.html">Search Engine Optimization</a></h3>
+              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem
+                tempore.</p>
+              <div class="trainer d-flex justify-content-between align-items-center">
+                <div class="trainer-profile d-flex align-items-center">
+                  <img src="{%  static 'img/trainers/trainer-2.jpg'%}" class="img-fluid" alt="">
+                  <span>Lana</span>
+                </div>
+                <div class="trainer-rank d-flex align-items-center">
+                  <i class="bx bx-user"></i>&nbsp;35
+                  &nbsp;&nbsp;
+                  <i class="bx bx-heart"></i>&nbsp;42
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- End Course Item-->
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+          <div class="course-item">
+            <img src="{%  static 'img/course-3.jpg'%}" class="img-fluid" alt="...">
+            <div class="course-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Content</h4>
+                <p class="price">$180</p>
+              </div>
+
+              <h3><a href="course-details.html">Copywriting</a></h3>
+              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem
+                tempore.</p>
+              <div class="trainer d-flex justify-content-between align-items-center">
+                <div class="trainer-profile d-flex align-items-center">
+                  <img src="{%  static 'img/course-3.jpg'%}assets/img/trainers/trainer-3.jpg" class="img-fluid" alt="">
+                  <span>Brandon</span>
+                </div>
+                <div class="trainer-rank d-flex align-items-center">
+                  <i class="bx bx-user"></i>&nbsp;20
+                  &nbsp;&nbsp;
+                  <i class="bx bx-heart"></i>&nbsp;85
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- End Course Item-->
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+          <div class="course-item">
+            <img src="{%  static 'img/course-3.jpg'%}" class="img-fluid" alt="...">
+            <div class="course-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Content</h4>
+                <p class="price">$180</p>
+              </div>
+
+              <h3><a href="course-details.html">Copywriting</a></h3>
+              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem
+                tempore.</p>
+              <div class="trainer d-flex justify-content-between align-items-center">
+                <div class="trainer-profile d-flex align-items-center">
+                  <img src="{%  static 'img/trainers/trainer-3.jpg'%}" class="img-fluid" alt="">
+                  <span>Brandon</span>
+                </div>
+                <div class="trainer-rank d-flex align-items-center">
+                  <i class="bx bx-user"></i>&nbsp;20
+                  &nbsp;&nbsp;
+                  <i class="bx bx-heart"></i>&nbsp;85
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- End Course Item-->
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+          <div class="course-item">
+            <img src="{% static 'img/course-3.jpg'%}" class="img-fluid" alt="...">
+            <div class="course-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Content</h4>
+                <p class="price">$180</p>
+              </div>
+
+              <h3><a href="course-details.html">Copywriting</a></h3>
+              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem
+                tempore.</p>
+              <div class="trainer d-flex justify-content-between align-items-center">
+                <div class="trainer-profile d-flex align-items-center">
+                  <img src="{%  static 'img/trainers/trainer-3.jpg'%}" class="img-fluid" alt="">
+                  <span>Brandon</span>
+                </div>
+                <div class="trainer-rank d-flex align-items-center">
+                  <i class="bx bx-user"></i>&nbsp;20
+                  &nbsp;&nbsp;
+                  <i class="bx bx-heart"></i>&nbsp;85
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- End Course Item-->
+
+      </div>
+
+    </div>
+  </section><!-- End top projects Section -->
+
+  <!-- ======= Latest projects Section ======= -->
+  <section id="popular-courses" class="courses">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Projects</h2>
+        <p>Latest Projects</p>
+      </div>
+      {% for p in latestFiveList %}
+      {% if forloop.counter  != 2 and forloop.counter  <= 3 %}
+          <div class="col-md-3 latestproject">
+              <div class="card cardDes">
+                   <a href="{% url 'project_details' p.id %}">
+                  <img src="/media/{{ p.projects.all.first.picture }}" class="card-img-top projImg"> </a>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ p.title }}</h5>
+                    <p class="card-text desc">{{p.details }}</p>
+                  </div>
+              </div>
+          </div>
+      {% elif forloop.counter == 2 %}
+          <div class="col-md-6 latestproject">
+              <div class="card cardDes">
+               <a href="{% url 'project_details' p.id %}">
+                  <img src="/media/{{ p.projects.all.first.picture }}" class="card-img-top projImg"> </a>
+                  <div class="card-body">
+                    <h5 class="card-title">{{p.title }}</h5>
+                    <p class="card-text desc">{{p.details }}</p>
+                  </div>
+              </div>
+          </div>
+          {% elif forloop.counter > 3 %}
+          <div class="col-md-6 latestproject">
+              <div class="card cardDes">
+                   <a href="{% url 'project_details' p.id %}">
+                  <img src="/media/{{ p.projects.all.first.picture }}" class="card-img-top projImg"> </a>
+                  <div class="card-body">
+                    <h5 class="card-title">{{p.title }}</h5>
+                    <p class="card-text desc">{{p.details }}</p>
+                  </div>
+              </div>
+          </div>
+      {% endif %}
+      {% endfor %}
+     </div>  
+      <!-- <div class="row" data-aos="zoom-in" data-aos-delay="100">
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="course-item">
+            <img src="/static/{{ p.imgs.all.first.img_url }}" class="img-fluid" alt="...">
+            <div class="course-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Web Development</h4>
+                <p class="price">$169</p>
+              </div>
+
+              <h3><a href="course-details.html">Website Design</a></h3>
+              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem
+                tempore.</p>
+              <div class="trainer d-flex justify-content-between align-items-center">
+                <div class="trainer-profile d-flex align-items-center">
+                  <img src="{%  static 'img/trainers/trainer-1.jpg'%}" class="img-fluid" alt="">
+                  <span>Antonio</span>
+                </div>
+                <div class="trainer-rank d-flex align-items-center">
+                  <i class="bx bx-user"></i>&nbsp;50
+                  &nbsp;&nbsp;
+                  <i class="bx bx-heart"></i>&nbsp;65
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> End Course Item -->
+
+        <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+            <div class="course-item">
+              <img src="{%  static 'img/course-2.jpg'%}" class="img-fluid" alt="...">
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Marketing</h4>
+                  <p class="price">$250</p>
+                </div>
+
+                <h3><a href="course-details.html">Search Engine Optimization</a></h3>
+                <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="{%  static 'img/trainers/trainer-2.jpg'%}" class="img-fluid" alt="">
+                    <span>Lana</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;35
+                    &nbsp;&nbsp;
+                    <i class="bx bx-heart"></i>&nbsp;42
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> End Course Item -->
+
+        <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+            <div class="course-item">
+              <img src="{%  static 'img/course-3.jpg'%}" class="img-fluid" alt="...">
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Content</h4>
+                  <p class="price">$180</p>
+                </div>
+
+                <h3><a href="course-details.html">Copywriting</a></h3>
+                <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="{%  static 'img/course-3.jpg'%}assets/img/trainers/trainer-3.jpg" class="img-fluid" alt="">
+                    <span>Brandon</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;20
+                    &nbsp;&nbsp;
+                    <i class="bx bx-heart"></i>&nbsp;85
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> End Course Item -->
+
+        <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+            <div class="course-item">
+              <img src="{%  static 'img/course-3.jpg'%}" class="img-fluid" alt="...">
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Content</h4>
+                  <p class="price">$180</p>
+                </div>
+
+                <h3><a href="course-details.html">Copywriting</a></h3>
+                <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="{%  static 'img/trainers/trainer-3.jpg'%}" class="img-fluid" alt="">
+                    <span>Brandon</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;20
+                    &nbsp;&nbsp;
+                    <i class="bx bx-heart"></i>&nbsp;85
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> End Course Item -->
+
+        <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+            <div class="course-item">
+              <img src="{% static 'img/course-3.jpg'%}" class="img-fluid" alt="...">
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Content</h4>
+                  <p class="price">$180</p>
+                </div>
+
+                <h3><a href="course-details.html">Copywriting</a></h3>
+                <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="{%  static 'img/trainers/trainer-3.jpg'%}" class="img-fluid" alt="">
+                    <span>Brandon</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;20
+                    &nbsp;&nbsp;
+                    <i class="bx bx-heart"></i>&nbsp;85
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> End Course Item -->
+
+      </div>
+
+    </div>
+  </section><!-- End Latest projects Section -->
+
+  <!-- ======= Featured projects Section ======= -->
+  <section id="popular-courses" class="courses">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Projects</h2>
+        <p>Featured Projects</p>
+      </div>
+      <div class="row">
+        {% for p in fProject %}
+            <div class="fproject">
+                <div class="card cardDes">
+                     <a href="{% url 'project_details' p.id %}">
+                    <img src="/media/{{ p.projects.all.first.picture }}" class="card-img-top projImg"> </a>
+                    <div class="card-body">
+                      <h5 class="card-title">{{p.title }}</h5>
+                      <p class="card-text desc">{{p.details }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+      </div>  
+      <!-- <div class="row" data-aos="zoom-in" data-aos-delay="100">
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="course-item">
+            <img src="{%  static 'img/course-1.jpg'%}" class="img-fluid" alt="...">
+            <div class="course-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Web Development</h4>
+                <p class="price">$169</p>
+              </div>
+
+              <h3><a href="course-details.html">Website Design</a></h3>
+              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem
+                tempore.</p>
+              <div class="trainer d-flex justify-content-between align-items-center">
+                <div class="trainer-profile d-flex align-items-center">
+                  <img src="{%  static 'img/trainers/trainer-1.jpg'%}" class="img-fluid" alt="">
+                  <span>Antonio</span>
+                </div>
+                <div class="trainer-rank d-flex align-items-center">
+                  <i class="bx bx-user"></i>&nbsp;50
+                  &nbsp;&nbsp;
+                  <i class="bx bx-heart"></i>&nbsp;65
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- End Course Item-->
+
+        <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="course-item">
+            <img src="{%  static 'img/course-2.jpg'%}" class="img-fluid" alt="...">
+            <div class="course-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Marketing</h4>
+                <p class="price">$250</p>
+              </div>
+
+              <h3><a href="course-details.html">Search Engine Optimization</a></h3>
+              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem
+                tempore.</p>
+              <div class="trainer d-flex justify-content-between align-items-center">
+                <div class="trainer-profile d-flex align-items-center">
+                  <img src="{%  static 'img/trainers/trainer-2.jpg'%}" class="img-fluid" alt="">
+                  <span>Lana</span>
+                </div>
+                <div class="trainer-rank d-flex align-items-center">
+                  <i class="bx bx-user"></i>&nbsp;35
+                  &nbsp;&nbsp;
+                  <i class="bx bx-heart"></i>&nbsp;42
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- End Course Item-->
+
+        <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+          <div class="course-item">
+            <img src="{%  static 'img/course-3.jpg'%}" class="img-fluid" alt="...">
+            <div class="course-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Content</h4>
+                <p class="price">$180</p>
+              </div>
+
+              <h3><a href="course-details.html">Copywriting</a></h3>
+              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem
+                tempore.</p>
+              <div class="trainer d-flex justify-content-between align-items-center">
+                <div class="trainer-profile d-flex align-items-center">
+                  <img src="{%  static 'img/course-3.jpg'%}assets/img/trainers/trainer-3.jpg" class="img-fluid" alt="">
+                  <span>Brandon</span>
+                </div>
+                <div class="trainer-rank d-flex align-items-center">
+                  <i class="bx bx-user"></i>&nbsp;20
+                  &nbsp;&nbsp;
+                  <i class="bx bx-heart"></i>&nbsp;85
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> End Course Item -->
+
+        <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+          <div class="course-item">
+            <img src="{%  static 'img/course-3.jpg'%}" class="img-fluid" alt="...">
+            <div class="course-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Content</h4>
+                <p class="price">$180</p>
+              </div>
+
+              <h3><a href="course-details.html">Copywriting</a></h3>
+              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem
+                tempore.</p>
+              <div class="trainer d-flex justify-content-between align-items-center">
+                <div class="trainer-profile d-flex align-items-center">
+                  <img src="{%  static 'img/trainers/trainer-3.jpg'%}" class="img-fluid" alt="">
+                  <span>Brandon</span>
+                </div>
+                <div class="trainer-rank d-flex align-items-center">
+                  <i class="bx bx-user"></i>&nbsp;20
+                  &nbsp;&nbsp;
+                  <i class="bx bx-heart"></i>&nbsp;85
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> End Course Item -->
+
+        <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+          <div class="course-item">
+            <img src="{% static 'img/course-3.jpg'%}" class="img-fluid" alt="...">
+            <div class="course-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Content</h4>
+                <p class="price">$180</p>
+              </div>
+
+              <h3><a href="course-details.html">Copywriting</a></h3>
+              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem
+                tempore.</p>
+              <div class="trainer d-flex justify-content-between align-items-center">
+                <div class="trainer-profile d-flex align-items-center">
+                  <img src="{%  static 'img/trainers/trainer-3.jpg'%}" class="img-fluid" alt="">
+                  <span>Brandon</span>
+                </div>
+                <div class="trainer-rank d-flex align-items-center">
+                  <i class="bx bx-user"></i>&nbsp;20
+                  &nbsp;&nbsp;
+                  <i class="bx bx-heart"></i>&nbsp;85
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> End Course Item --> 
+
+      </div>
+
+    </div>
+  </section><!-- End Featured projects Section -->
+
+</main><!-- End #main -->
+
+
+<a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
+<div id="preloader"></div>
+
+
+{% endblock %}

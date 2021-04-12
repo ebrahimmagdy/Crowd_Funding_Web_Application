@@ -44,7 +44,6 @@
   
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-      
       <h1 class="logo mr-auto"><a href="{% url 'home' %}">Crowd Fund</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -52,15 +51,9 @@
       <nav class="nav-menu d-none d-lg-block" style="margin-right:6%">
         
         <ul>
-          <!-- <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form> -->
-
           <li class="active"><a href="{% url 'home' %}">Home</a></li>
-
-          <li><a href="about.html">About</a></li>
-          <li><a href="courses.html">Projects</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="{% url 'show_projects' %}">Projects</a></li>
           <li class="drop-down"><a href="">Categories</a>
             <ul>
               <li><a href="#">Food Bank</a></li>
@@ -69,8 +62,8 @@
               <li><a href="#">Education</a></li>
               <li><a href="#">Animals</a></li>
             </ul>
-          <!-- <li><a href="contact.html">Contact</a></li> -->
-           
+          <li><a href="{% url 'project' %}">Create Project</a></li>
+
         </ul>
         
       </nav><!-- .nav-menu -->
@@ -104,12 +97,12 @@
 
    
 {#        ======= Search Section =======#}
-
-{#      <form class="example" action="" style="margin-left:3%; max-width:300px">#}
-{#          <input type="text" placeholder="Search for projects..." name="search2">#}
-{#          <button type="submit"><i class="fa fa-search"></i></button>#}
-{#      </form> #}
-  
+<!-- 
+     <form class="example" action="{% url 'project_search_name' %}" method="POST" style="margin-left:3%; max-width:300px">
+          <input type="text" placeholder="Search for projects..." name="search_proj">
+          <button type="submit"><i class="fa fa-search"></i></button>
+      </form>  -->
+    {% block login_and_search %}  {% endblock %}
     </div>
 
   </header>

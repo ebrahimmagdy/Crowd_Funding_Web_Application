@@ -7,6 +7,8 @@ urlpatterns = [
     #path("login", user.login, name="login"),
     #path("signup", user.signup, name="signup"),
     path("project", project.create_project, name="project"),
+    path("show_projects", home.show_projects, name="show_projects"),
+
     path("activate", user.activate, name="activate"),
     url(r'^project/(?P<id>\d+)/$', project.project_details, name="project_details"),
     url(r'^project/(?P<id>\d+)/comment$', project.project_comment, name="add_comment"),
@@ -15,5 +17,7 @@ urlpatterns = [
     url(r'^project/(?P<id>\d+)/donation$', project.project_donation, name="submit_donation"),
     url(r'^project/(?P<id>\d+)/rate$', project.project_rating, name="submit_rating"),
     url(r'^project/(?P<id>\d+)/delete$', project.project_delete, name="delete_project"),
+    # path("search", project.search, name="search"),
+    path('search', project.search, name="project_search_name"),
 ]
 
