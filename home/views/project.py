@@ -44,10 +44,8 @@ def project_details(request, id):
     pictures = Project_Pictures.objects.all().filter(project_id=project)
     comments = Comment.objects.all().filter(project_id=project)
     rate = Rate_Project.objects.all().filter(project_id=project).aggregate(rate=Avg('rate'))
-    tag = Project.tags.all().filter(project=project)[:1]
-    print(tag)
-    similar_projects = Project.objects.all().filter(tags=tag)
-    print(similar_projects)
+    tags = project.tags.names()
+    similar_projects = Project.objects.filter(tags__name__in=tags).order_by('id')[1:5]
     commented_users = {}
     profiles = {}
     for comment in comments:
@@ -101,8 +99,9 @@ def project_report(request, id):
 def comment_report(request, id):
     if request.user.is_authenticated:
         user = request.user
-        comment = Comment.objects.get(id = id)
-        report = Report_Comment.objects.create(comment_id = comment, user_id = user, message = request.POST.get('message'))
+        cid = request.POST.get('id')
+        comment = Comment.objects.get(id = cid)
+        report = Report_Comment.objects.create(comment_id = comment, user_id = user, message = request.POST.get('text'))
         return JsonResponse({'message':'Your report submited successfully!'})
         #return HttpResponseRedirect(request.path_info)
         #return render(request, 'project/project_comment.html', {'comment': comment, 'user': user})

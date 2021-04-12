@@ -11,7 +11,7 @@ class Comment(models.Model):
     reports = models.ManyToManyField(User, through='Report_Comment', related_name='user_comment_report')
 
 class Report_Comment(models.Model):
-    id = models.BigIntegerField(primary_key=True)
+    # id = models.BigIntegerField(primary_key=True)
     comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True, related_name='comment_id')
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='user_id')
     message = models.CharField(max_length=255)

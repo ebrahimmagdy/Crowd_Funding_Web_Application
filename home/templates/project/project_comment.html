@@ -15,8 +15,55 @@
             <span class="dots"></span> 
             <!-- <small>Reply</small>  -->
             <span class="dots"></span>
-            <button id="{{ comment.id }}" type="button" class="btn" data-toggle="modal" data-target="#exampleModal1" data-whatever="{{ comment.id }}"><small>Report a comment</small></button> 
+            <button id="{{ comment.id }}" type="button" class="btn" ><small>Report</small></button> 
+            <form id="{{ comment.id }}_form" method="POST" style="display: none;">
+                {% csrf_token %}
+                <input type="text" id="{{ comment.id }}_text">
+                <button id="{{ comment.id }}_submit" type="button" class="btn btn-secondary d-block">Submit</button>
+            </form>
         </div>
         <!-- <div class="icons align-items-center"> <i class="fa fa-star text-warning"></i> <i class="fa fa-check-circle-o check-icon"></i> </div> -->
     </div>
 </div>
+
+<script>
+document
+      .getElementById("{{ comment.id }}")
+      .addEventListener("click", appear_report_form);
+
+    function appear_report_form(){
+        document.getElementById("{{ comment.id }}_form").style.display = "inline-block";
+        document.getElementById("{{ comment.id }}").style.display = "none";
+    }
+    document
+      .getElementById("{{ comment.id }}_submit")
+      .addEventListener("click", save_project_report);
+    function save_project_report() {
+      console.log("function fired comment report");
+      var token = "{{csrf_token}}";
+      var text = document.getElementById("{{ comment.id }}_text").value;
+      var id = "{{ comment.id }}"
+      console.log(text);
+      $.ajax({
+        type: "POST",
+        headers: { "X-CSRFToken": token },
+        url: "reportcomment",
+        data: { text: text, id: id },
+  
+        success: function (data) {
+          //console.log(data);
+          // $('#text').val('');
+          // $('#comments').append(data);
+          // $(".card p-3").html(
+          //   '<p style="color:brown">Form Successfully Submitted</p>'
+          // );
+          console.log(data); 
+        },
+        error: function (data) {
+          console.log(data);
+        },
+      });
+      document.getElementById("{{ comment.id }}_form").style.display = "none";
+      document.getElementById("{{ comment.id }}").style.display = "inline-block";
+    }
+</script>
