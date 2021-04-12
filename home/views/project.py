@@ -14,26 +14,29 @@ from django.http import JsonResponse
 import datetime
 import sys
 from django.db.models import Sum, Count, Avg, Q
+from django.http import Http404  
+
 
 
 def create_project(request):
     projects = Project.objects.order_by('id')
     common_tags = Project.tags.most_common()[:4]
     form = ProjectForm(request.POST or None)
-    if form.is_valid():
-        project = form.save(commit=False)
-        project.slug = slugify(project.title)
-        project.user_id = request.user
-        project.save()
-        form.save_m2m()
-        pictures = request.FILES.getlist("photos")
-        for picture in pictures:
-            Project_Pictures.objects.create(
-                project_id=project,
-                picture=picture
-            )
+    if request.method == 'POST':
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.slug = slugify(project.title)
+            project.user_id = request.user
+            project.save()
+            form.save_m2m()
+            pictures = request.FILES.getlist("photos")
+            for picture in pictures:
+                Project_Pictures.objects.create(
+                    project_id=project,
+                    picture=picture
+                )
 
-        return redirect("project_details", id=project.id)
+            return redirect("project_details", id=project.id)
     categories = Category.objects.all()
     context = {
         'projects': projects,
@@ -103,7 +106,8 @@ def project_comment(request, id):
         # return JsonResponse({'message':'It worked fine'})
         # return HttpResponseRedirect(request.path_info)
         return render(request, 'project/project_comment.html', {'comment': comment, 'user': user, 'profile': profile})
-
+    else:
+        raise Http404  
 
 def project_report(request, id):
     if request.user.is_authenticated:
@@ -113,7 +117,8 @@ def project_report(request, id):
         return JsonResponse({'message': 'It worked fine'})
         # return HttpResponseRedirect(request.path_info)
         # return render(request, 'project/project_comment.html', {'comment': comment, 'user': user})
-
+    else:
+        raise Http404  
 
 def comment_report(request, id):
     if request.user.is_authenticated:
@@ -124,7 +129,8 @@ def comment_report(request, id):
         return JsonResponse({'message':'Your report submited successfully!'})
         #return HttpResponseRedirect(request.path_info)
         #return render(request, 'project/project_comment.html', {'comment': comment, 'user': user})
-
+    else:
+        raise Http404  
 #   if request.method == 'POST':
 #     cf = CommentForm(request.POST or None)
 #     if cf.is_valid():
@@ -158,13 +164,18 @@ def project_donation(request, id):
         user = request.user
         project = Project.objects.get(id=id)
         donation = Donation.objects.create(project_id=project, user_id=user, amount=request.POST.get('amount'))
-        return JsonResponse({'message': 'It worked fine'})
+        donation = Donation.objects.all().filter(project_id=project).aggregate(amount=Sum('amount'))
+        return JsonResponse({'donation':donation})
         # return render(request, 'project/project_details.html', {'donation': donation})
+    else:
+        raise Http404  
 
 def project_delete(request, id):
     if request.user.is_authenticated:
         project = Project.objects.get(id = id).delete()
         return redirect("home")
+    else:
+        raise Http404  
 
 def project_rating(request, id):
     if request.user.is_authenticated:
@@ -172,8 +183,10 @@ def project_rating(request, id):
         project = Project.objects.get(id=id)
         Rate_Project.objects.filter(Q(project_id=project) & Q(user_id=user)).delete()
         rate = Rate_Project.objects.create(project_id=project, user_id=user, rate=request.POST.get('rate'))
-        return JsonResponse({'message': 'report project worked fine'})
-
+        rate = Rate_Project.objects.all().filter(project_id=project).aggregate(rate=Avg('rate'))
+        return JsonResponse({'rate': rate})
+    else:
+        raise Http404  
 
 def project(request):
     return render(request, "project/project.html")

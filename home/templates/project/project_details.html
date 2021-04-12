@@ -69,7 +69,7 @@
               {% if rate == None %}
                 <p>unrated</p>
               {% else %}
-                <p>{{ rate }} / 5</p>
+                <p id="rate_p">{{ rate }} / 5</p>
               {% endif %}
             </div>
 
@@ -88,7 +88,7 @@
               {% if donation.amount == None %}
                 <p>0</p>
               {% else %}
-                <p id='old_donation'>{{ donation.amount }}</p>
+                <p id='donation_p'>{{ donation.amount }}</p>
               {% endif %}
               
             </div>
@@ -320,30 +320,6 @@
      </div>
    </div> 
   
-   <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Report this Comment</h5>
-            <button type="button" class="close" data-dismiss="modal1" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">type your report here:</label>
-                <textarea class="form-control" id="comment_report"></textarea>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal1">Cancel</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal1" id="submit_comment_report">Submit</button>
-          </div>
-        </div>
-      </div>
-    </div> 
 
 <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
 
@@ -388,47 +364,6 @@
     }
 </script>
 
-<script>
-  $('#exampleModal1').on('show.bs.modal1', function (event) {
-      var button = $(event.relatedTarget) // Button that triggered the modal
-      var comment_id = button.data('whatever')
-      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-      console.log(comment_id);
-      var modal1 = $(this)
-  });
-  document
-      .getElementById("submit_comment_report")
-      .addEventListener("click", save_comment_report);
-  
-    function save_comment_report() {
-      console.log("function fired comment report");
-      var token = "{{csrf_token}}";
-      var text = $("#comment_report").val();
-      var c_text = $("#comment_text").val();
-      alert(text);
-      $.ajax({
-        type: "POST",
-        headers: { "X-CSRFToken": token },
-        url: "reportcomment",
-        data: { text: text },
-  
-        success: function (data) {
-          //console.log(data);
-          // $('#text').val('');
-          // $('#comments').append(data);
-          // $(".card p-3").html(
-          //   '<p style="color:brown">Form Successfully Submitted</p>'
-          // );
-          console.log(data); 
-        },
-        error: function (data) {
-          console.log(data);
-        },
-      });
-    }
-</script>
-
   <script>
     document
       .getElementById("project_form_button")
@@ -449,9 +384,6 @@
           //console.log(data);
           $('#text').val('');
           $('#comments').append(data);
-          $(".card p-3").html(
-            '<p style="color:brown">Form Successfully Submitted</p>'
-          );
           console.log(data); 
         },
         error: function (data) {
@@ -472,7 +404,6 @@
       console.log("amount function fired");
       var token = "{{csrf_token}}";
       var amount = $("#amount").val();
-      var old_amount = $('#old_donation').val();
       $.ajax({
         type: "POST",
         headers: { "X-CSRFToken": token },
@@ -480,12 +411,9 @@
         data: { amount: amount },
   
         success: function (data) {
-          $("#donation-result").html(
-            '<p style="color:green">Donation Successfully Submitted</p>'
-          );
           $("#amount").val('');
-          $('#old_donation').val(old_amount + amount);
           console.log(data);
+          document.getElementById("donation_p").innerHTML = data.donation.amount
           // $('#comments').append(data)
         },
         error: function (data) {
@@ -502,9 +430,9 @@
     $(document).ready(function(){
     $("input[type='radio']").click(function(){
     sim = $("input[type='radio']:checked").val();
-    alert(sim);
     if (sim<3) { $('.myratings').css('color','red'); $(".myratings").text(sim); }else{ $('.myratings').css('color','green'); $(".myratings").text(sim); } 
     var token = "{{csrf_token}}";
+    console.log(sim);
     $.ajax({
         type: "POST",
         headers: { "X-CSRFToken": token },
@@ -512,7 +440,7 @@
         data: { rate: sim },
   
         success: function (data) {
-          
+          document.getElementById("rate_p").innerHTML = data.rate.rate + "/ 5"
           console.log(data);
           // $('#comments').append(data)
         },
